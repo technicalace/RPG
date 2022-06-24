@@ -1,5 +1,7 @@
 package gameCode.gameLogic;
 
-public class player {
-    
+public class player extends gameCode.game{
+
+
+
 }
