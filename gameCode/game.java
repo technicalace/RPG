@@ -12,8 +12,9 @@ import gameCode.gameLogic.phase;
 import gameCode.gameLogic.player;
 
 public class game {
-    public String name, biome;
-    public int uResp;
+    public String name;
+    public int userR;
+    public Biome biome;
     
     public void intro() {
         Scanner scan = new Scanner(System.in);
@@ -33,6 +34,15 @@ public class game {
       
     }
 
+     // ENUM METHODS
+     public enum Biome {
+        PLAINS,
+        TUNDRA,
+        FOREST,
+        DUNES
+    }
+
+    // BIOME SELECT
     public void biomeSelect() {
         Scanner scan = new Scanner(System.in);
 
@@ -42,32 +52,31 @@ public class game {
         System.out.println("Welcome " +name+ "\nSelect the biome you would like to start in:");
         System.out.println("1.) Plains\n2.) Tundra\n3.) Forest\n4.) Dunes\n");
 
-        ArrayList<String> biomeSelect = new ArrayList<String>(); 
+        Biome plns = Biome.PLAINS;
+        Biome tudra = Biome.TUNDRA; 
+        Biome frst = Biome.FOREST; 
+        Biome dns = Biome.DUNES;
         
-        biomeSelect.add(0, "Plains"); 
-        biomeSelect.add(1, "Tundra");
-        biomeSelect.add(2, "Forest"); 
-        biomeSelect.add(3, "Dunes");
-    
         try {
-            uResp = scan.nextInt(); 
-            
-            switch(uResp) {
+            userR = scan.nextInt(); 
+            switch(userR) {
                 case 1: 
                     System.out.println("=========");
-                    biome = "Plains";
                     plains();
                     break;
                 case 2: 
                     System.out.println("==========");
+                    biome = biome.TUNDRA;
                     tundra();
                     break;
                 case 3: 
                     System.out.println("==========");
+                    biome = biome.FOREST;
                     forest();
                     break; 
                 case 4: 
                     System.out.println("==========");
+                    biome = biome.DUNES;
                     dunes();
                     break; 
                 default:
@@ -81,9 +90,9 @@ public class game {
             System.out.println("That is an invalid input, please try again.");
             biomeSelect();
         }
-    
     }
 
+    // PLAINS
     public void plains() {
         Scanner scan = new Scanner(System.in);
         Timer tmr = new Timer();
@@ -91,7 +100,7 @@ public class game {
         phase phse = new phase();
         
         System.out.println("You have chosen the plains biome.");
-        phse.battle();
+        biome = biome.PLAINS;
 
 
         TimerTask dialogue1 = new TimerTask() { // declaring timer task 
@@ -123,8 +132,11 @@ public class game {
             }
         };
 
+        
+
     }
 
+    // TUNDRA
     void tundra() {
         Scanner scan = new Scanner(System.in); 
         Timer tmr = new Timer(); 
@@ -162,38 +174,8 @@ public class game {
         return name.matches("[a-zA-Z]+");
     }
 
-   /*public boolean isPlains(int uResp) {
-        if (uResp == 1) {
-            return true; 
-        } else {
-            return false;
-        }
-   }
+  
 
-   public boolean isTundra(int uResp) {
-        if (uResp == 2) {
-            return true; 
-        } else {
-            return false;
-        }
-    }
-
-   public boolean isForest(int uResp) {
-        if (uResp == 3) {
-            return true; 
-        } else {
-            return false;
-        }
 }
-
-   public boolean isDunes(int uResp) {
-        if (uResp == 4) {
-            return true; 
-        } else {
-            return false;
-        }*/
-    }
-
- 
 
 
