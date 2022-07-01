@@ -14,7 +14,6 @@ import gameCode.gameLogic.player;
 public class game {
     public String name;
     public int userR;
-    public Biome biome;
     
     public void intro() {
         Scanner scan = new Scanner(System.in);
@@ -45,39 +44,33 @@ public class game {
     // BIOME SELECT
     public void biomeSelect() {
         Scanner scan = new Scanner(System.in);
+        boolean isPlains;
 
         player pl = new player();
+        Biome myBiome;
 
         System.out.println("==========");
         System.out.println("Welcome " +name+ "\nSelect the biome you would like to start in:");
         System.out.println("1.) Plains\n2.) Tundra\n3.) Forest\n4.) Dunes\n");
 
-        Biome plns = Biome.PLAINS;
-        Biome tudra = Biome.TUNDRA; 
-        Biome frst = Biome.FOREST; 
-        Biome dns = Biome.DUNES;
-        
         try {
             userR = scan.nextInt(); 
             switch(userR) {
                 case 1: 
                     System.out.println("=========");
-                    plains();
+                    checkBiome(Biome.PLAINS);
                     break;
                 case 2: 
                     System.out.println("==========");
-                    biome = biome.TUNDRA;
-                    tundra();
+                    checkBiome(Biome.TUNDRA);
                     break;
                 case 3: 
                     System.out.println("==========");
-                    biome = biome.FOREST;
-                    forest();
+                    checkBiome(Biome.FOREST);
                     break; 
                 case 4: 
                     System.out.println("==========");
-                    biome = biome.DUNES;
-                    dunes();
+                    checkBiome(Biome.DUNES);
                     break; 
                 default:
                     System.out.println("==========");
@@ -98,10 +91,6 @@ public class game {
         Timer tmr = new Timer();
 
         phase phse = new phase();
-        
-        System.out.println("You have chosen the plains biome.");
-        biome = biome.PLAINS;
-
 
         TimerTask dialogue1 = new TimerTask() { // declaring timer task 
 
@@ -132,9 +121,14 @@ public class game {
             }
         };
 
-        
-
+        // OUTPUT TO USER
+        System.out.println("You have chosen the plains biome.");
+        tmr.schedule(dialogue1, 1500);
+        tmr.schedule(dialogue2, 3500);
+        tmr.schedule(dialogue3, 5500);
+        phse.battlePlains();
     }
+
 
     // TUNDRA
     void tundra() {
@@ -144,7 +138,6 @@ public class game {
         phase phse = new phase();
 
         System.out.println("You have chosen the tundra biome.");
-        phse.battle();
 
         TimerTask dialogue1 = new TimerTask() {
 
@@ -160,22 +153,39 @@ public class game {
     void forest() {
         phase phse = new phase();
 
-        phse.battle();
     }
 
     void dunes() {
         phase phse = new phase();
 
-        phse.battle();
 
+    }
+
+    public void checkBiome(Biome myBiome) {
+        switch(myBiome) {
+            case PLAINS: 
+                plains();
+                break;
+            case TUNDRA: 
+                tundra();
+                break;
+            case FOREST: 
+                forest();
+                break;
+            case DUNES: 
+                dunes();
+                break; 
+            default: 
+                System.out.println("Something went wrong...");
+                break;
+        }
     }
 
     public boolean isString(String name) {
         return name.matches("[a-zA-Z]+");
     }
 
-  
-
 }
+
 
 

@@ -19,4 +19,24 @@ public class enemy {
         this.enemDmg = dmg; 
         this.enemHp = hp; 
     }
+
+    public String getEnemyName() {
+        return this.enemName;
+    }
+
+    public String getEnemyDesc() {
+        return this.enemDesc; 
+    }
+
+    public String getEnemyIntro() {
+        return this.ememIntro; 
+    }
+
+    public int getEnemyDmg() {
+        return this.enemDmg;
+    }
+
+    public int getEnemyHealth() {
+        return this.enemHp;
+    }
 }
