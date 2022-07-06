@@ -12,22 +12,28 @@ import gameCode.gameLogic.phase;
 import gameCode.gameLogic.player;
 
 public class game {
-    public String name;
     public int userR;
+    public String uResp;
+
+    static Scanner scanner = new Scanner(System.in);
     
     public void intro() {
         Scanner scan = new Scanner(System.in);
-        String uResp;
-
         player pl = new player();
+
+
         System.out.println("Welcome to an RPG.\nInsert your name: ");
 
-        name = scan.nextLine();
-        if(!isString(name)) {
+        uResp = scan.nextLine();
+        pl.setPName(uResp);
+
+        if(!isString(pl.playerName)) {
             System.out.println("==========");
             System.out.println("That is not a valid input, please try again.");
             intro();
         } else {
+            System.out.println("==========");
+        System.out.println("Welcome " +pl.getPName()+ "\nSelect the biome you would like to start in:");
             biomeSelect();
         }
       
@@ -44,13 +50,10 @@ public class game {
     // BIOME SELECT
     public void biomeSelect() {
         Scanner scan = new Scanner(System.in);
-        boolean isPlains;
-
         player pl = new player();
+
         Biome myBiome;
 
-        System.out.println("==========");
-        System.out.println("Welcome " +name+ "\nSelect the biome you would like to start in:");
         System.out.println("1.) Plains\n2.) Tundra\n3.) Forest\n4.) Dunes\n");
 
         try {
@@ -121,12 +124,22 @@ public class game {
             }
         };
 
+        TimerTask battlePhase = new TimerTask() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                phse.battlePlains();
+            }
+            
+        };
+
         // OUTPUT TO USER
         System.out.println("You have chosen the plains biome.");
         tmr.schedule(dialogue1, 1500);
         tmr.schedule(dialogue2, 3500);
         tmr.schedule(dialogue3, 5500);
-        phse.battlePlains();
+        tmr.schedule(battlePhase, 7500);
     }
 
 
