@@ -4,7 +4,7 @@ public class enemy {
     public String enemName, enemDesc;
     public int enemDmg;
     public int enemHp;
-    public String ememIntro;
+    public String enemIntro;
 
     public void plainsEnemy() {
         enemy bull = new enemy("Ferioucious Bull","You see something big in the distance...", "Ears are blowing steam!", 6, 21);
@@ -12,14 +12,15 @@ public class enemy {
         enemy bird = new enemy("Obnoxious Bird","KAWWWK KAWWWK", "You see something soar in the sky...", 5, 16);
     }
 
-    public enemy(String name, String desc, String intro, int dmg, int hp) {
-        this.enemName = name;
-        this.ememIntro = intro;
-        this.enemDesc = desc;
-        this.enemDmg = dmg; 
-        this.enemHp = hp; 
+    public enemy(String ename, String edesc, String eintro, int edmg, int ehp) {
+        this.enemName = ename;
+        this.enemIntro = eintro;
+        this.enemDesc = edesc;
+        this.enemDmg = edmg; 
+        this.enemHp = ehp; 
     }
 
+    // GETTERS
     public String getEnemyName() {
         return this.enemName;
     }
@@ -29,7 +30,7 @@ public class enemy {
     }
 
     public String getEnemyIntro() {
-        return this.ememIntro; 
+        return this.enemIntro; 
     }
 
     public int getEnemyDmg() {
@@ -39,4 +40,25 @@ public class enemy {
     public int getEnemyHealth() {
         return this.enemHp;
     }
-}
+
+    // SETTERS
+    public void setEnemyName(String ename) {
+        this.enemName = ename;
+    }
+
+    public void setEnemyDesc(String edesc) {
+        this.enemDesc = edesc;
+    }
+
+    public void setEnemyIntro(String eintro) {
+        this.enemIntro = eintro;
+    }
+
+    public void setEnemyDmg(int edmg) {
+        this.enemDmg = edmg; 
+    }
+
+    public void setEnemyHp(int ehp) {
+        this.enemHp = ehp; 
+    }
+ }
