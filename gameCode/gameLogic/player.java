@@ -28,5 +28,21 @@ public class player extends gameCode.game{
         return playerDmg;
     }
 
+    public void fullHeal() {
+        if (playerHp < 20) {
+            playerHp = 20;
+        }
+    }
 
-}
+    public void gameOver(){ 
+        if (playerHp == 0) {
+            System.out.println("You have died! Ending the game...");
+
+            System.exit(0);
+        }
+    }
+
+    public void battleScreen() { // battle screen that will pop up during battle phase
+        System.out.println("1.) Fight ---------- 2.) Heal");
+    }
+ }

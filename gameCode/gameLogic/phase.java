@@ -27,22 +27,32 @@ public class phase extends game{
     // BATTLE PHASES 
     public void battlePlains() {
         Random rand = new Random();
+        player pl = new player(); 
 
         String[] plainsEnemies = {"Bull", "Moose", "Bird"};
 
         int randEnemy = rand.nextInt(plainsEnemies.length); 
         switch(randEnemy) {
             case 0: 
-                
+                System.out.println(plainsEnmy1.getEnemyDesc());
+                System.out.println("The " + plainsEnmy1.getEnemyName() + " attacks!\n==========");
+
+                pl.battleScreen();
                 break;
             case 1: 
-                this.name = plainsEnemy2.enemName; 
+                System.out.println(plainsEnemy2.getEnemyDesc());
+                System.out.println("The " + plainsEnemy2.getEnemyName() + " attacks!\n==========");
+
+                pl.battleScreen();
                 break;
             case 2: 
-                this.name = plainsEnemy3.enemName; 
+                System.out.println(plainsEnemy3.getEnemyDesc());
+                System.out.println("The " + plainsEnemy3.getEnemyName() + " attacks!\n==========");
+
+                pl.battleScreen();
                 break;
         }             
-        System.out.println(this.name);
+        //System.out.println(this.name);
     }
 
     public void battleTundra() {

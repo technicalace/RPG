@@ -61,4 +61,7 @@ public class enemy {
     public void setEnemyHp(int ehp) {
         this.enemHp = ehp; 
     }
+
+
+    
  }
