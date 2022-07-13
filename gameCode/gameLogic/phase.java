@@ -27,7 +27,8 @@ public class phase extends game{
     // BATTLE PHASES 
     public void battlePlains() {
         Random rand = new Random();
-        player pl = new player(); 
+        game gm = new game();
+        player pl = new player(super.name);
 
         String[] plainsEnemies = {"Bull", "Moose", "Bird"};
 
@@ -37,19 +38,18 @@ public class phase extends game{
                 System.out.println(plainsEnmy1.getEnemyDesc());
                 System.out.println("The " + plainsEnmy1.getEnemyName() + " attacks!\n==========");
 
-                pl.battleScreen();
+                gm.battleScreen();
                 break;
             case 1: 
                 System.out.println(plainsEnemy2.getEnemyDesc());
                 System.out.println("The " + plainsEnemy2.getEnemyName() + " attacks!\n==========");
-
-                pl.battleScreen();
+                gm.battleScreen();
                 break;
             case 2: 
                 System.out.println(plainsEnemy3.getEnemyDesc());
                 System.out.println("The " + plainsEnemy3.getEnemyName() + " attacks!\n==========");
 
-                pl.battleScreen();
+                gm.battleScreen();
                 break;
         }             
         //System.out.println(this.name);

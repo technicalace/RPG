@@ -1,30 +1,41 @@
 package gameCode.gameLogic;
 
-public class player extends gameCode.game{
-    public String playerName; 
-    public int playerHp, playerDmg;
+import java.util.Scanner;
+
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+import javax.swing.plaf.synth.SynthScrollPaneUI;
+
+import gameCode.game;
+
+public class player extends entity{
+    public player(String name) {
+        super(name, 20, 5);
+        //TODO Auto-generated constructor stub
+    }
     
-    public void setPName(String pName) {
-        this.playerName = pName; 
+   //player specific functions 
+
+    /*public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
-    public void setPHp(int pHp) {
-        this.playerHp = pHp;
+    public void setPlayerHp(int playerHp) {
+        this.playerHp = playerHp;
     }
 
-    public void setPDmg(int pDmg) {
-        this.playerDmg = pDmg;
+    public void setPlayerDmg(int playerDmg) {
+        this.playerDmg = playerDmg;
     }
 
-    public String getPName() {
-        return playerName; 
+    public String getPlayerName(Scanner scan) {
+        return scan.nextLine(); 
     }
 
-    public int getPHp() {
+    public int getPlayerHp() {
         return playerHp;
     }
 
-    public int getPDmg() {
+    public int getPlayerDmg() {
         return playerDmg;
     }
 
@@ -40,9 +51,15 @@ public class player extends gameCode.game{
 
             System.exit(0);
         }
-    }
+    }*/
 
-    public void battleScreen() { // battle screen that will pop up during battle phase
-        System.out.println("1.) Fight ---------- 2.) Heal");
-    }
- }
+    /*public void battleScreen() { // battle screen that will pop up during battle phase
+        phase phse = new phase(); 
+        game gm = new game();
+        player player = new player(name);
+
+        System.out.println(player.name + "\nHP: " + hp);
+    
+ }*/
+
+}

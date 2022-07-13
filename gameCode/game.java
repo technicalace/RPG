@@ -13,27 +13,26 @@ import gameCode.gameLogic.player;
 
 public class game {
     public int userR;
-    public String uResp;
+    public String uResp, name;
+    public static player player;
 
     static Scanner scanner = new Scanner(System.in);
     
     public void intro() {
         Scanner scan = new Scanner(System.in);
-        player pl = new player();
-
 
         System.out.println("Welcome to an RPG.\nInsert your name: ");
 
-        uResp = scan.nextLine();
-        pl.setPName(uResp);
+        name = scanner.next(); 
+        player = new player(name);
 
-        if(!isString(pl.playerName)) {
+        if(!isString(name)) {
             System.out.println("==========");
             System.out.println("That is not a valid input, please try again.");
             intro();
         } else {
             System.out.println("==========");
-        System.out.println("Welcome " +pl.getPName()+ "\nSelect the biome you would like to start in:");
+        System.out.println("Welcome " + player.name + "\nSelect the biome you would like to start in:");
             biomeSelect();
         }
       
@@ -50,7 +49,6 @@ public class game {
     // BIOME SELECT
     public void biomeSelect() {
         Scanner scan = new Scanner(System.in);
-        player pl = new player();
 
         Biome myBiome;
 
@@ -196,8 +194,12 @@ public class game {
 
     public boolean isString(String name) {
         return name.matches("[a-zA-Z]+");
-    }
+    }  
 
+    public void battleScreen() {
+        System.out.println(player.name + "\nHP: " + player.hp + "\n========");
+        System.out.println("1.) ATTACK ============ 2.) HEAL\n\nSelect either 1 or 2....");
+    }
 }
 
 
