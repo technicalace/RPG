@@ -4,7 +4,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.TimerTask;
 
-
+import javax.sql.rowset.spi.SyncResolver;
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import java.util.Timer;
 
@@ -113,15 +114,6 @@ public class game {
             
         };
 
-        TimerTask dialogue3 = new TimerTask() {
-
-            @Override
-            public void run() {
-                // TODO Auto-generated method stub
-                System.out.println("You start to walk forward until you hear rustling in the tall grass.");
-            }
-        };
-
         TimerTask battlePhase = new TimerTask() {
 
             @Override
@@ -136,8 +128,7 @@ public class game {
         System.out.println("You have chosen the plains biome.");
         tmr.schedule(dialogue1, 1500);
         tmr.schedule(dialogue2, 3500);
-        tmr.schedule(dialogue3, 5500);
-        tmr.schedule(battlePhase, 7500);
+        tmr.schedule(battlePhase, 5500);
     }
 
 
@@ -148,8 +139,6 @@ public class game {
 
         phase phse = new phase();
 
-        System.out.println("You have chosen the tundra biome.");
-
         TimerTask dialogue1 = new TimerTask() {
 
             @Override
@@ -159,16 +148,134 @@ public class game {
             }
             
         };
-    }
 
+        TimerTask dialogue2 = new TimerTask() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                System.out.println("The snow is crunchy...");    
+            }
+            
+        };
+
+        TimerTask tunBoss = new TimerTask() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                    phse.battleTundra(); 
+            }
+            
+        };
+
+        System.out.println("You have chosen the tundra biome.");
+        tmr.schedule(dialogue1, 1500);
+        tmr.schedule(dialogue2, 3500);
+        tmr.schedule(tunBoss, 5500);
+    }
+    // FOREST BIOME 
     void forest() {
+        Scanner scan = new Scanner(System.in); 
+        Timer tmr = new Timer(); 
+
         phase phse = new phase();
 
+        TimerTask dialogue1 = new TimerTask() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                System.out.println("You land into a tree...");    
+            }
+            
+        };
+
+        TimerTask dialogue2 = new TimerTask() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                System.out.println("As you climb down from the tree the air around you feels damp and humid...");
+            }
+        };
+
+        TimerTask dialogue3 = new TimerTask() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                System.out.println("You start walking on forward from the tree...");   
+            }
+        };
+
+        TimerTask forestBoss = new TimerTask() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                phse.battleForest();
+            }
+            
+        };
+
+        System.out.println("You have chosen the forest biome.");
+        tmr.schedule(dialogue1, 1500);
+        tmr.schedule(dialogue2, 3500);
+        tmr.schedule(dialogue3, 5500);
+        tmr.schedule(forestBoss, 7500);
+        
     }
-
+    // DUNES BIOME
     void dunes() {
+        Scanner scan = new Scanner(System.in); 
+        Timer tmr = new Timer(); 
+
         phase phse = new phase();
 
+        TimerTask dialogue1 = new TimerTask() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                System.out.println("You wake up on hot sand...");
+            }
+            
+        };
+
+        TimerTask dialogue2 = new TimerTask() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                System.out.println("You see the blazing sun in the middle of the sky as you stand up...");                
+            }
+        };
+
+        TimerTask dialogue3 = new TimerTask() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                System.out.println("You start walking forward from where you woke up...");    
+            }
+            
+        };
+
+        TimerTask dunesBoss = new TimerTask() {
+
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                phse.battleDunes();
+            }
+            
+        };
+        System.out.println("You have chosen the tundra biome...");
+        tmr.schedule(dialogue1, 1500);
+        tmr.schedule(dialogue2, 3500);
+        tmr.schedule(dialogue3, 5500);
+        tmr.schedule(dunesBoss, 7500);
 
     }
 

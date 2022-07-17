@@ -9,7 +9,7 @@ import gameCode.game;
 
 public class player extends entity{
     public player(String name) {
-        super(name, 20, 5);
+        super(name, 20, 5, 20);
         //TODO Auto-generated constructor stub
     }
     
@@ -62,4 +62,25 @@ public class player extends entity{
     
  }*/
 
+ public void selfHeal() {
+    int counter = 3;
+    boolean cntEqZero;
+
+    for (int i = 0; hp < maxHp; i++) {
+        i = 3;
+        if (counter == 0) {
+            cntEqZero = true;
+            while(cntEqZero = true) {
+                System.out.println("You seem to have used your 3 heals...");
+            }
+        } else {
+            cntEqZero = false;
+            while (cntEqZero = false) {
+                i += hp;
+                System.out.println("You have healed up to 3 points");
+                System.out.println("HP: " + hp);
+            }
+        }
+    }
+ }
 }
