@@ -22,6 +22,8 @@ public class enemy {
         this.emaxHp = emaxHp;
     }
 
+    
+
     // GETTERS
     public String getEnemyName() {
         return this.enemName;

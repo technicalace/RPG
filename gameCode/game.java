@@ -9,6 +9,8 @@ import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import java.util.Timer;
 
+import gameCode.gameLogic.enemy;
+import gameCode.gameLogic.entity;
 import gameCode.gameLogic.phase;
 import gameCode.gameLogic.player;
 
@@ -304,8 +306,31 @@ public class game {
     }  
 
     public void battleScreen() {
+        int playerSelect; 
+
+        phase phse = new phase(); 
+        player pl = new player(name);
+
+        Scanner scan = new Scanner(System.in);
+
         System.out.println(player.name + "\nHP: " + player.hp + "\n========");
         System.out.println("1.) ATTACK ============ 2.) HEAL\n\nSelect either 1 or 2....");
+        
+        try {
+            playerSelect = scan.nextInt(); 
+            if (playerSelect == 1) {
+                phse.playerAttack();
+            } else if (playerSelect == 2) {
+                pl.getHpBoost();
+            } else {
+                System.out.println("Out of bounds! ");
+                battleScreen();
+            }
+        } catch (InputMismatchException ie) {
+            System.out.println("That is an invalid input please try again...");
+            battleScreen();
+        }
+
     }
 }
 
