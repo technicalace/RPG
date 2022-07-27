@@ -89,11 +89,10 @@ public class player extends entity{
 
     if (hp <= maxHp) {
         hp = maxHp; 
-        System.out.println("=============");
         System.out.println("You have healed!\nYour HP is now " + hp);
     } else if (hp < maxHp) {
         hp += 3; 
-        System.out.println("==========\nYou have healed up 3 health points!");
+        System.out.println("You have healed up 3 health points!");
         System.out.println("You hp is now " + hp);
     }
  }

@@ -2,15 +2,20 @@ package gameCode.gameLogic;
 
 import java.util.ArrayList;
 import java.util.FormatFlagsConversionMismatchException;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.swing.plaf.synth.SynthScrollBarUI;
 
 import gameCode.game;
 
 public class phase extends game{
     game gm = new game(); 
     public int enemyNum;
+
     public String enemyName;
     // PLAINS ENEMIES 
     enemy plainsEnmy1 = new enemy("Ferioucious Bull","You see something big in the distance...", "Ears are blowing steam!", 6, 21, 21);
@@ -24,11 +29,11 @@ public class phase extends game{
     enemy forestEnemy1 = new enemy("Living Vine", "Always growing.", "You step on a vine, it moved!", 6, 18, 18);
     enemy forestEnemy2 = new enemy("Raging Monkey", "Head is steaming!", "You hear branches crack from above...", 7, 17, 17);
     enemy forestEnemy3 = new enemy("Green Slime", "Goopy", "You see slime drip from the tree... it starts to fall into a blob.",4, 24, 24);
-    // DUNWA ENEMIES
+    // DUNES ENEMIES
     enemy dunesEnemy1 = new enemy("Fericoucious Vulture", "Looking to pick a fight.", "You see a soaring shadow block the blazing sun...", 7, 16, 16);
     enemy dunesEnemy2 = new enemy("Cheeky Possum", "Scraubling around.", "You hear pitter patter on the floor...", 7, 15, 15);
     enemy dunesEnemy3 = new enemy("Giant Sand Worm", "Slithering around.", "You feel the ground shift under your feet...", 9, 19, 19);
-
+    
     // BATTLE PHASES 
     public void battlePlains() {
         Random rand = new Random();
@@ -38,7 +43,7 @@ public class phase extends game{
         game gm = new game();
         player pl = new player(super.name);
 
-        String[] plainsEnemies = {"Bull", "Moose", "Bird"};
+        String[] plainsEnemies= {"Bull", "Moose", "Bird"};
 
         int randEnemy = rand.nextInt(plainsEnemies.length); 
 
@@ -56,21 +61,21 @@ public class phase extends game{
                 System.out.println("The " + plainsEnmy1.getEnemyName() + " attacks!\n==========");
                 enemyName = "Bull";
 
-                gm.battleScreen();
+                battleScreen();
                 break;
             case 1: 
                 System.out.println(plainsEnemy2.getEnemyIntro());
                 System.out.println("The " + plainsEnemy2.getEnemyName() + " attacks!\n==========");
                 enemyName = "Moose";
                
-                gm.battleScreen();
+                battleScreen();
                 break;
             case 2: 
                 System.out.println(plainsEnemy3.getEnemyIntro());
                 System.out.println("The " + plainsEnemy3.getEnemyName() + " attacks!\n==========");
                 enemyName = "Bird";
 
-                gm.battleScreen();
+                battleScreen();
                 break;
         }             
     }
@@ -100,21 +105,21 @@ public class phase extends game{
                 System.out.println("The " + tundraEnemy1.getEnemyName() + " attacks!\n==========");
                 enemyName = "Mound"; 
 
-                gm.battleScreen();
+                battleScreen();
                 break; 
             case 1: 
                 System.out.println(tundraEnemy2.getEnemyIntro());
                 System.out.println("The " + tundraEnemy2.getEnemyName() + " attacks!\n==========");
                 enemyName = "Whale";
                 
-                gm.battleScreen();
+                battleScreen();
                 break; 
             case 2: 
                 System.out.println(tundraEnemy3.getEnemyIntro());
                 System.out.println("The " + tundraEnemy3.getEnemyName() + " attacks!\n==========");
                 enemyName = "Raindeer"; 
 
-                gm.battleScreen();
+                battleScreen();
                 break;
         }
     }
@@ -144,21 +149,21 @@ public class phase extends game{
                 System.out.println("The " + forestEnemy1.getEnemyName() + " attacks!\n==========");
                 enemyName = "Vine";
 
-                gm.battleScreen();
+                battleScreen();
                 break; 
             case 1: 
                 System.out.println(forestEnemy2.getEnemyIntro());
                 System.out.println("The " + forestEnemy2.getEnemyName() + " attacks!\n==========");
                 enemyName = "Monkey";
 
-                gm.battleScreen();
+                battleScreen();
                 break; 
             case 2: 
                 System.out.println(forestEnemy3.getEnemyIntro());
                 System.out.println("the " + forestEnemy3.getEnemyName() + " attacks\n==========");
                 enemyName = "Slime";
 
-                gm.battleScreen(); 
+                battleScreen(); 
                 break; 
         }
      }
@@ -188,24 +193,55 @@ public class phase extends game{
                 System.out.println("The " + dunesEnemy1.getEnemyName() + " attacks!\n==========");
                 enemyName = "Vulture";
 
-                gm.battleScreen(); 
+                battleScreen(); 
                 break; 
             case 1: 
                 System.out.println(dunesEnemy2.getEnemyIntro());
                 System.out.println("The " + dunesEnemy2.getEnemyName() + " attacks!\n==========");
                 enemyName = "Possum";
 
-                gm.battleScreen();
+                battleScreen();
                 break; 
             case 2: 
                 System.out.println(dunesEnemy3.getEnemyIntro());
                 System.out.println(dunesEnemy3.getEnemyName() + " attacks!\n======");
                 enemyName = "Worm";
 
-                gm.battleScreen();
+                battleScreen();
                 break; 
         }
     }
+
+    // BATTLE FUNCTIONS 
+    TimerTask enemyAttacking = new TimerTask() {
+
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+            enemyAttack();
+        }
+        
+    };
+
+    TimerTask enemyHealing = new TimerTask() {
+
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+            enemyHeal();
+        }
+        
+    };
+
+    TimerTask playerAttacking = new TimerTask() {
+
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+            playerAttack();
+        }
+        
+    };
 
     public void playerAttack() {
         player pl = new player(super.name); 
@@ -283,8 +319,8 @@ public class phase extends game{
         player pl = new player(super.name);
 
         switch (enemyNum) {
-            // PLAINS ENEMIES 
             case 1: 
+                 // PLAINS ENEMIES 
                 System.out.println(plainsEnmy1.getEnemyName() + " attacks!");
                 System.out.println("-" + plainsEnmy1.getEnemyDmg());
 
@@ -294,7 +330,7 @@ public class phase extends game{
                 break;
             case 2: 
                 System.out.println(plainsEnemy2.getEnemyName() + " attacks!");
-                System.out.println("-" + plainsEnemy2.enemDmg);
+                System.out.println("-" + plainsEnemy2.getEnemyDmg());
 
                 pl.hp -= plainsEnemy2.enemDmg;
 
@@ -302,12 +338,14 @@ public class phase extends game{
                 break; 
             case 3: 
                 System.out.println(plainsEnemy3.getEnemyName());
-                System.out.println("-" + plainsEnemy3.enemDmg);
+                System.out.println("-" + plainsEnemy3.getEnemyDmg());
 
                 pl.hp -= plainsEnemy3.enemDmg;
+
+                System.out.println("HP: " + pl.hp);
                 break; 
-            // TUNDRA ENEMIES
             case 4: 
+                // TUNDRA ENEMIES
                 System.out.println(tundraEnemy1.getEnemyName() + " attacks!");
                 System.out.println("-" + tundraEnemy1.getEnemyDmg());
 
@@ -315,6 +353,205 @@ public class phase extends game{
 
                 System.out.println("HP: " + pl.hp);
                 break; 
+            case 5: 
+                System.out.println(tundraEnemy2.getEnemyName() + " attacks!");
+                System.out.println("-" + tundraEnemy2.getEnemyDmg());
+
+                pl.hp -= tundraEnemy2.enemDmg; 
+
+                System.out.println("HP: " + pl.hp);
+                break; 
+            case 6: 
+                System.out.println(tundraEnemy3.getEnemyName() + " attacks!");
+                System.out.println("-" + tundraEnemy3.getEnemyDmg());
+
+                pl.hp -= tundraEnemy3.enemDmg; 
+
+                System.out.println("HP: " + pl.hp);
+                break;
+            case 7: 
+                // FOREST ENEMIES 
+                System.out.println(forestEnemy1.getEnemyName() + " attacks!");
+                System.out.println("-" + forestEnemy1.getEnemyDmg());
+
+                pl.hp -= forestEnemy1.enemDmg; 
+
+                System.out.println("HP: " + pl.hp);
+                break; 
+            case 8: 
+                System.out.println(forestEnemy2.getEnemyName() + " attacks!");
+                System.out.println("-" + forestEnemy2.getEnemyDmg());
+
+                pl.hp -= forestEnemy2.enemDmg; 
+
+                System.out.println("HP " + pl.hp);
+                break;
+            case 9: 
+                System.out.println(forestEnemy3.getEnemyName() + " attacks!");
+                System.out.println("-" + forestEnemy3.getEnemyDmg());
+
+                pl.hp -= forestEnemy3.enemDmg;
+
+                System.out.println("HP: " + pl.hp);
+                break; 
+            case 10: 
+                // DUNES ENEMIES 
+                System.out.println(dunesEnemy1.getEnemyName() + " attacks!");
+                System.out.println("-" + forestEnemy2.getEnemyDmg());
+
+                pl.hp -= dunesEnemy1.enemDmg; 
+
+                System.out.println("HP: " + pl.hp);
+                break; 
+            case 11: 
+                System.out.println(dunesEnemy2.getEnemyName() + " attacks!");
+                System.out.println("-" + dunesEnemy2.getEnemyDmg());
+
+                pl.hp -= dunesEnemy2.enemDmg; 
+
+                System.out.println("HP: " + pl.hp);
+                break; 
+            case 12: 
+                System.out.println(dunesEnemy3.getEnemyName() + " attacks!");
+                System.out.println("-" + dunesEnemy3.getEnemyDmg());
+
+                pl.hp -= dunesEnemy3.enemDmg; 
+
+                System.out.println("HP: " + pl.hp);
+                break; 
             }
+    }
+
+    public void enemyHeal() {
+        int currentHp; // enemy hp 
+
+        switch (enemyNum) {
+            case 1: 
+                // PLAINS ENEMIES 
+                System.out.println(plainsEnmy1.getEnemyName() + " heals!\n+1");
+                if (plainsEnmy1.enemHp == plainsEnmy1.emaxHp) {
+                    System.out.println("The bull maxes out!");
+                    plainsEnmy1.enemHp = plainsEnmy1.emaxHp;
+                    System.out.println(plainsEnmy1.getEnemyName() + "'s HP: " + plainsEnmy1.getEnemyHealth());
+                } else {
+                    currentHp = (plainsEnmy1.enemHp + 1); 
+                    System.out.println(plainsEnmy1.getEnemyName() + "'s HP: " + currentHp);
+                }
+                break; 
+            case 2: 
+                System.out.println(plainsEnemy2.getEnemyName() + " heals!\n+1");
+                if (plainsEnemy2.enemHp == plainsEnemy2.emaxHp) {
+                    System.out.println("The moose maxes out!");
+                    plainsEnemy2.enemHp = plainsEnemy2.emaxHp; 
+                    System.out.println(plainsEnemy2.getEnemyName() + "'s HP: " + plainsEnemy2.getEnemyHealth());
+                } else {
+                    currentHp = (plainsEnemy2.enemHp + 1); 
+                    System.out.println(plainsEnemy2.getEnemyName() + "'s HP: " + currentHp);
+                }
+                break; 
+            case 3: 
+                System.out.println(plainsEnemy3.getEnemyName() + " heals!\n+1");
+                if (plainsEnemy3.enemHp == plainsEnemy3.emaxHp) {
+                    System.out.println("The Bird maxes out!");
+                    plainsEnemy3.enemHp = plainsEnemy3.emaxHp; 
+                    System.out.println(plainsEnemy3.getEnemyName() + "'s HP: " + plainsEnemy3.getEnemyHealth());
+                } else {
+                    currentHp = (plainsEnemy3.enemHp + 1);
+                    System.out.println(plainsEnemy3.getEnemyName() + "'s HP: " + currentHp);
+                }
+                break; 
+        }
+    }
+
+    public void battleScreen() {
+        int playerSelect; 
+        Timer tmr = new Timer();
+
+        phase phse = new phase(); 
+        player pl = new player(name);
+
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println(player.name + "\nHP: " + player.hp + "\n========");
+        System.out.println("1.) ATTACK ============ 2.) HEAL\n\nSelect either 1 or 2....");
+        
+        try {
+            playerSelect = scan.nextInt(); 
+            if (playerSelect == 1) {
+                System.out.println("==========");
+                playerAttack();
+                System.out.println("==========");
+            } else if (playerSelect == 2) {
+                System.out.println("==========");
+                pl.getHpBoost();
+                System.out.println("==========");
+            } else {
+                System.out.println("==========");
+                System.out.println("Out of bounds! ");
+                battleScreen();
+            }
+        } catch (InputMismatchException ie) {
+            System.out.println("That is an invalid input please try again...");
+            battleScreen();
+        }
+        
+        switch(enemyName) {
+            case "Bull": 
+                // ==========plains enemies========== 
+                System.out.println("It is the " + plainsEnmy1.getEnemyName()+"'s turn!");
+                //enemyAttack();
+                tmr.schedule(enemyHealing, 1200);
+                break; 
+            case "Moose": 
+                System.out.println("It is the " + plainsEnemy2.getEnemyName()+"'s turn!");
+                //enemyAttack();
+                tmr.schedule(enemyHealing, 1200);
+                break; 
+            case "Bird": 
+                System.out.println("it is the " + plainsEnemy3.getEnemyName()+"'s turn!");
+                //enemyAttack();
+                tmr.schedule(enemyHealing, 1200);
+                break;
+            case "Mound": 
+                // ========== tundra enemies ========== 
+                System.out.println("It is the " + tundraEnemy1.getEnemyName() + "'s turn!");
+                enemyAttack();
+                break; 
+            case "Whale": 
+                System.out.println("It is the " + tundraEnemy2.getEnemyName() + "'s turn!");
+                enemyAttack();
+                break; 
+            case "Raindeer": 
+                System.out.println("It is the " + tundraEnemy3.getEnemyName() + "'s turn!");
+                enemyAttack();
+                break; 
+            case "Vine": 
+                // ========== forest enemies========== 
+                System.out.println("It is the " + forestEnemy1.getEnemyName() + "'s turn!");
+                enemyAttack();
+                break; 
+            case "Monkey": 
+                System.out.println("It is the " + forestEnemy2.getEnemyName() + "'s turn!");
+                enemyAttack();
+                break; 
+            case "Slime": 
+                System.out.println("It is the " + forestEnemy3.getEnemyName() + "'s turn!");
+                enemyAttack();
+                break;
+            case "Vulture": 
+                //  ========== dunes enemies ========== 
+                System.out.println("It is the " + dunesEnemy1.getEnemyName() + "'s turn!");
+                enemyAttack();
+                break; 
+            case "Possum": 
+                System.out.println("It is the " + dunesEnemy2.getEnemyName() + "'s turn!");
+                enemyAttack();
+                break; 
+            case "Worm": 
+                System.out.println("It is the " + dunesEnemy3.getEnemyName() + "'s turn!");
+                enemyAttack();
+                break; 
+        } 
+
     }
 }
