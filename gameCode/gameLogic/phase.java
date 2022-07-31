@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ThreadLocalRandom;
 
 import javax.swing.plaf.synth.SynthScrollBarUI;
 
@@ -337,7 +338,7 @@ public class phase extends game{
                 System.out.println("HP: " + pl.hp);
                 break; 
             case 3: 
-                System.out.println(plainsEnemy3.getEnemyName());
+                System.out.println(plainsEnemy3.getEnemyName() + " attacks!");
                 System.out.println("-" + plainsEnemy3.getEnemyDmg());
 
                 pl.hp -= plainsEnemy3.enemDmg;
@@ -567,8 +568,14 @@ public class phase extends game{
     }
 
     public void battleScreen() {
-        int playerSelect; 
+        int playerSelect;
+        int randomNum;  
+        
+        int minVal = 0; 
+        int maxVal = 1;
+
         Timer tmr = new Timer();
+        ThreadLocalRandom tlr = ThreadLocalRandom.current();
 
         phase phse = new phase(); 
         player pl = new player(name);
@@ -603,17 +610,41 @@ public class phase extends game{
                 // ==========plains enemies========== 
                 System.out.println("It is the " + plainsEnmy1.getEnemyName()+"'s turn!");
                 //enemyAttack();
-                tmr.schedule(enemyHealing, 1200);
+                randomNum = tlr.nextInt(minVal, maxVal + 1);
+                System.out.println("==========");
+                if (randomNum == 0) {
+                    tmr.schedule(enemyAttacking, 1500);
+                } else if (randomNum == 1) {
+                    tmr.schedule(enemyHealing, 1500);
+                } else {
+                    System.out.println("Unknown error has occurred...");
+                }
                 break; 
             case "Moose": 
                 System.out.println("It is the " + plainsEnemy2.getEnemyName()+"'s turn!");
                 //enemyAttack();
-                tmr.schedule(enemyHealing, 1200);
+                randomNum = tlr.nextInt(minVal, maxVal + 1);
+                System.out.println("==========");
+                if (randomNum == 0) {
+                    tmr.schedule(enemyAttacking, 1500);
+                } else if (randomNum == 1) {
+                    tmr.schedule(enemyHealing, 1500);
+                } else {
+                    System.out.println("Unknown error has occurred...");
+                }
                 break; 
             case "Bird": 
                 System.out.println("it is the " + plainsEnemy3.getEnemyName()+"'s turn!");
                 //enemyAttack();
-                tmr.schedule(enemyHealing, 1200);
+                randomNum = tlr.nextInt(minVal, maxVal + 1);
+                System.out.println("==========");
+                if (randomNum == 0) {
+                    tmr.schedule(enemyAttacking, 1500);
+                } else if (randomNum == 1) {
+                    tmr.schedule(enemyHealing, 1500);
+                } else {
+                    System.out.println("Unknown error has occurred...");
+                }
                 break;
             case "Mound": 
                 // ========== tundra enemies ========== 
