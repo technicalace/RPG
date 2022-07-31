@@ -460,6 +460,109 @@ public class phase extends game{
                     System.out.println(plainsEnemy3.getEnemyName() + "'s HP: " + currentHp);
                 }
                 break; 
+            case 4: 
+                // TUNDRA ENEMIES 
+                System.out.println(tundraEnemy1.getEnemyName() + " heals!\n+1");
+                if (tundraEnemy1.enemHp == tundraEnemy1.emaxHp) {
+                    System.out.println("The Ice maxes out!");
+                    tundraEnemy1.enemHp = tundraEnemy1.emaxHp; 
+                    System.out.println(tundraEnemy1.getEnemyName() + "'s HP: " + tundraEnemy1.getEnemyHealth());
+                } else {
+                    currentHp = (tundraEnemy1.enemHp + 1); 
+                    System.out.println(tundraEnemy1.getEnemyName() + "'s HP: " + currentHp);
+                }
+                break; 
+            case 5: 
+                System.out.println(tundraEnemy2.getEnemyName() + " heals\n+1");
+                if (tundraEnemy2.enemHp == tundraEnemy2.emaxHp) {
+                    System.out.println("The Whale maxes out!");
+                    tundraEnemy2.enemHp = tundraEnemy2.emaxHp; 
+                    System.out.println(tundraEnemy2.getEnemyName() + "'s HP: " + tundraEnemy2.getEnemyHealth());
+                } else {
+                    currentHp = (tundraEnemy2.enemHp + 1);
+                    System.out.println(tundraEnemy2.getEnemyName() + "'s HP: " + currentHp);
+                }
+                break; 
+            case 6: 
+                System.out.println(tundraEnemy3.getEnemyName() + " heals!\n+1");
+                if (tundraEnemy3.enemHp == tundraEnemy2.emaxHp) {
+                    System.out.println("The Raindeer maxes out!");
+                    tundraEnemy3.enemHp = tundraEnemy3.emaxHp; 
+                    System.out.println(tundraEnemy3.getEnemyName() + "'s HP: " + tundraEnemy3.getEnemyHealth());
+                } else {
+                    currentHp = (tundraEnemy3.enemHp + 1); 
+                    System.out.println(tundraEnemy3.getEnemyName() + "'s HP: " + currentHp);
+                }
+                break; 
+            case 7: 
+                // FOREST ENEMIES 
+                System.out.println(forestEnemy1.getEnemyName() + " heals!\n+1");
+                if (forestEnemy1.enemHp == forestEnemy1.emaxHp) {
+                    System.out.println("The Vine maxes out!");
+                    forestEnemy1.enemHp = forestEnemy1.emaxHp; 
+                    System.out.println(forestEnemy1.getEnemyName() + "'s HP: " + forestEnemy1.getEnemyHealth());
+                } else {
+                    currentHp = (forestEnemy1.enemHp + 1); 
+                    System.out.println(forestEnemy1.getEnemyName() + "'s HP: " + currentHp);
+                }
+                break; 
+            case 8: 
+                System.out.println(forestEnemy2.getEnemyName() + " heals!\n+1");
+                if (forestEnemy2.enemHp == forestEnemy2.emaxHp) {
+                    System.out.println("The Monkey Maxes out!");
+                    forestEnemy2.enemHp = forestEnemy1.emaxHp;
+                    System.out.println(forestEnemy2.getEnemyName() + "'s HP: " + forestEnemy2.getEnemyHealth());
+                } else {
+                    currentHp = (forestEnemy2.enemHp + 1);
+                    System.out.println(forestEnemy2.getEnemyName() + "'s HP: " + currentHp);
+                }
+                break; 
+            case 9: 
+                System.out.println(forestEnemy3.getEnemyName() + " heals!\n+1");
+                if (forestEnemy3.enemHp == forestEnemy3.emaxHp) {
+                    System.out.println("The Slime maxes out!");
+                    forestEnemy3.enemHp = forestEnemy3.emaxHp; 
+                    System.out.println(forestEnemy3.getEnemyName() + "'s HP: " + forestEnemy3.getEnemyHealth());
+                } else { 
+                    currentHp = (forestEnemy3.enemHp + 1); 
+                    System.out.println(forestEnemy3.getEnemyName() + "'s HP: " + currentHp);
+                }
+                break; 
+            case 10: 
+                // DUNES ENEMIES 
+                System.out.println(dunesEnemy1.getEnemyName() + " heals!\n+1");
+                if (dunesEnemy1.enemHp == dunesEnemy1.emaxHp) {
+                    System.out.println("The Vulture Maxes out!");
+                    dunesEnemy1.enemHp = dunesEnemy1.emaxHp; 
+                    System.out.println(dunesEnemy1.getEnemyName() + "'s HP: " + dunesEnemy1.getEnemyHealth());
+                } else {
+                    currentHp = (dunesEnemy1.enemHp + 1);
+                    System.out.println(dunesEnemy1.getEnemyName() + "'s HP: " + currentHp);
+                }
+                break; 
+            case 11: 
+                System.out.println(dunesEnemy2.getEnemyName() + " heals!\n+1");
+                if (dunesEnemy2.enemHp == dunesEnemy2.emaxHp) {
+                    System.out.println("The Possum Maxes out!");
+                    dunesEnemy2.enemHp = dunesEnemy2.emaxHp;
+                    System.out.println(dunesEnemy2.getEnemyName() + "'s HP: " + dunesEnemy2.getEnemyHealth());
+                } else {
+                    currentHp = (dunesEnemy2.enemHp + 1); 
+                    System.out.println(dunesEnemy2.getEnemyName() + "'s HP: " + currentHp);
+                }
+                break; 
+            case 12: 
+                System.out.println(dunesEnemy3.getEnemyName() + "heals!\n+1");
+                if (dunesEnemy3.enemHp == dunesEnemy3.emaxHp) {
+                    System.out.println("The Worm Maxes out!");
+                    dunesEnemy3.enemHp = dunesEnemy3.emaxHp; 
+                    System.out.println(dunesEnemy3.getEnemyName() + "'s HP: " + dunesEnemy3.getEnemyHealth() );
+                } else {
+                    currentHp = (dunesEnemy3.enemHp + 1);
+                    System.out.println(dunesEnemy3.getEnemyName() + "'s HP: " + currentHp);
+                }
+                break;
+                
         }
     }
 
