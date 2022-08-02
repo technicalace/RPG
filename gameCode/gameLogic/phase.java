@@ -19,22 +19,341 @@ public class phase extends game{
 
     public String enemyName;
     // PLAINS ENEMIES 
-    enemy plainsEnmy1 = new enemy("Ferioucious Bull","You see something big in the distance...", "Ears are blowing steam!", 6, 21, 21);
-    enemy plainsEnemy2 = new enemy("Clever Moose","Constantly plotting... ", "You hear something rustle in the tall grass...", 4, 19, 19);
-    enemy plainsEnemy3 = new enemy("Obnoxious Bird","KAWWWK KAWWWK", "You see something soar in the sky...", 5, 16, 16);
+    enemy plainsEnmy1 = new enemy("Ferioucious Bull","You see something big in the distance...", "Ears are blowing steam!", 6, 21, 21, true);
+    enemy plainsEnemy2 = new enemy("Clever Moose","Constantly plotting... ", "You hear something rustle in the tall grass...", 4, 19, 19, true);
+    enemy plainsEnemy3 = new enemy("Obnoxious Bird","KAWWWK KAWWWK", "You see something soar in the sky...", 5, 16, 16, true);
     // TUNDRA ENEMIES
-    enemy tundraEnemy1 = new enemy("Living Ice Mound", "Jumpy and crunchy!", "You feel the ground on your feet lower...", 3, 13, 13);
-    enemy tundraEnemy2 = new enemy("Frantic Whale", "It's huge!", "A frozen lake seprates you and the other side of the land, something starts to lift up...", 7, 16, 16);
-    enemy tundraEnemy3 = new enemy("Magic Raindeer", "Magical properties, never attacks directly.", "You hear prancing and a bright light in the distance getting closer...", 6, 15, 15);
+    enemy tundraEnemy1 = new enemy("Living Ice Mound", "Jumpy and crunchy!", "You feel the ground on your feet lower...", 3, 13, 13, true);
+    enemy tundraEnemy2 = new enemy("Frantic Whale", "It's huge!", "A frozen lake seprates you and the other side of the land, something starts to lift up...", 7, 16, 16, true);
+    enemy tundraEnemy3 = new enemy("Magic Raindeer", "Magical properties, never attacks directly.", "You hear prancing and a bright light in the distance getting closer...", 6, 15, 15, true);
     // FOREST ENEMIES 
-    enemy forestEnemy1 = new enemy("Living Vine", "Always growing.", "You step on a vine, it moved!", 6, 18, 18);
-    enemy forestEnemy2 = new enemy("Raging Monkey", "Head is steaming!", "You hear branches crack from above...", 7, 17, 17);
-    enemy forestEnemy3 = new enemy("Green Slime", "Goopy", "You see slime drip from the tree... it starts to fall into a blob.",4, 24, 24);
+    enemy forestEnemy1 = new enemy("Living Vine", "Always growing.", "You step on a vine, it moved!", 6, 18, 18, true);
+    enemy forestEnemy2 = new enemy("Raging Monkey", "Head is steaming!", "You hear branches crack from above...", 7, 17, 17, true);
+    enemy forestEnemy3 = new enemy("Green Slime", "Goopy", "You see slime drip from the tree... it starts to fall into a blob.",4, 24, 24, true);
     // DUNES ENEMIES
-    enemy dunesEnemy1 = new enemy("Fericoucious Vulture", "Looking to pick a fight.", "You see a soaring shadow block the blazing sun...", 7, 16, 16);
-    enemy dunesEnemy2 = new enemy("Cheeky Possum", "Scraubling around.", "You hear pitter patter on the floor...", 7, 15, 15);
-    enemy dunesEnemy3 = new enemy("Giant Sand Worm", "Slithering around.", "You feel the ground shift under your feet...", 9, 19, 19);
+    enemy dunesEnemy1 = new enemy("Fericoucious Vulture", "Looking to pick a fight.", "You see a soaring shadow block the blazing sun...", 7, 16, 16, true);
+    enemy dunesEnemy2 = new enemy("Cheeky Possum", "Scraubling around.", "You hear pitter patter on the floor...", 7, 15, 15, true);
+    enemy dunesEnemy3 = new enemy("Giant Sand Worm", "Slithering around.", "You feel the ground shift under your feet...", 9, 19, 19, true);
     
+    public void battleScreen() {
+        int playerSelect;
+        int randomNum;  
+        
+        int minVal = 0; 
+        int maxVal = 1;
+
+        Timer tmr = new Timer();
+        ThreadLocalRandom tlr = ThreadLocalRandom.current();
+
+        phase phse = new phase(); 
+        player pl = new player(name);
+
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println(player.name + "\nHP: " + player.hp + "\n========");
+        System.out.println("1.) ATTACK ============ 2.) HEAL\n\nSelect either 1 or 2....");
+        
+        try {
+            playerSelect = scan.nextInt(); 
+            if (playerSelect == 1) {
+                System.out.println("==========");
+                playerAttack();
+                System.out.println("==========");
+            } else if (playerSelect == 2) {
+                System.out.println("==========");
+                pl.getHpBoost();
+                System.out.println("==========");
+            } else {
+                System.out.println("==========");
+                System.out.println("Out of bounds! ");
+                battleScreen();
+            }
+        } catch (InputMismatchException ie) {
+            System.out.println("That is an invalid input please try again...");
+            battleScreen();
+        }
+        
+        switch(enemyName) {
+            case "Bull": 
+                // ==========plains enemies========== 
+                System.out.println("It is the " + plainsEnmy1.getEnemyName()+"'s turn!");
+                //enemyAttack();
+                randomNum = tlr.nextInt(minVal, maxVal + 1);
+                System.out.println("==========");
+                if (randomNum == 0) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyAttack();
+                } else if (randomNum == 1) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyHeal();
+                } else {
+                    System.out.println("Unknown error has occurred...");
+                }
+                break; 
+            case "Moose": 
+                System.out.println("It is the " + plainsEnemy2.getEnemyName()+"'s turn!");
+                //enemyAttack();
+                randomNum = tlr.nextInt(minVal, maxVal + 1);
+                System.out.println("==========");
+                if (randomNum == 0) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyAttack();
+                } else if (randomNum == 1) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyHeal();
+                } else {
+                    System.out.println("Unknown error has occurred...");
+                }
+                break; 
+            case "Bird": 
+                System.out.println("it is the " + plainsEnemy3.getEnemyName()+"'s turn!");
+                //enemyAttack();
+                randomNum = tlr.nextInt(minVal, maxVal + 1);
+                System.out.println("==========");
+                if (randomNum == 0) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyAttack();
+                } else if (randomNum == 1) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyHeal();
+                } else {
+                    System.out.println("Unknown error has occurred...");
+                }
+                break;
+            case "Mound": 
+                // ========== tundra enemies ========== 
+                System.out.println("It is the " + tundraEnemy1.getEnemyName() + "'s turn!");
+                randomNum = tlr.nextInt(minVal, maxVal + 1);
+                System.out.println("==========");
+                if (randomNum == 0) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyAttack();
+                } else if (randomNum == 1) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyHeal();
+                } else {
+                    System.out.println("Unknown error has occurred...");
+                }
+                break; 
+            case "Whale": 
+                System.out.println("It is the " + tundraEnemy2.getEnemyName() + "'s turn!");
+                randomNum = tlr.nextInt(minVal, maxVal + 1);
+                System.out.println("==========");
+                if (randomNum == 0) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyAttack();
+                } else if (randomNum == 1) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyHeal();
+                } else {
+                    System.out.println("Unknown error has occurred...");
+                }
+                break; 
+            case "Raindeer": 
+                System.out.println("It is the " + tundraEnemy3.getEnemyName() + "'s turn!");
+                randomNum = tlr.nextInt(minVal, maxVal + 1);
+                System.out.println("==========");
+                if (randomNum == 0) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyAttack();
+                } else if (randomNum == 1) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyHeal();
+                } else {
+                    System.out.println("Unknown error has occurred...");
+                }
+                break; 
+            case "Vine": 
+                // ========== forest enemies========== 
+                System.out.println("It is the " + forestEnemy1.getEnemyName() + "'s turn!");
+                randomNum = tlr.nextInt(minVal, maxVal + 1);
+                System.out.println("==========");
+                if (randomNum == 0) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyAttack();
+                } else if (randomNum == 1) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyHeal();
+                } else {
+                    System.out.println("Unknown error has occurred...");
+                }
+                break; 
+            case "Monkey": 
+                System.out.println("It is the " + forestEnemy2.getEnemyName() + "'s turn!");
+                randomNum = tlr.nextInt(minVal, maxVal + 1);
+                System.out.println("==========");
+                if (randomNum == 0) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyAttack();
+                } else if (randomNum == 1) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyHeal();
+                } else {
+                    System.out.println("Unknown error has occurred...");
+                }
+                break; 
+            case "Slime": 
+                System.out.println("It is the " + forestEnemy3.getEnemyName() + "'s turn!");
+                randomNum = tlr.nextInt(minVal, maxVal + 1);
+                System.out.println("==========");
+                if (randomNum == 0) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyAttack();
+                } else if (randomNum == 1) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyHeal();
+                } else {
+                    System.out.println("Unknown error has occurred...");
+                }
+                break;
+            case "Vulture": 
+                //  ========== dunes enemies ========== 
+                System.out.println("It is the " + dunesEnemy1.getEnemyName() + "'s turn!");
+                randomNum = tlr.nextInt(minVal, maxVal + 1);
+                System.out.println("==========");
+                if (randomNum == 0) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyAttack();
+                } else if (randomNum == 1) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyHeal();
+                } else {
+                    System.out.println("Unknown error has occurred...");
+                }
+                break; 
+            case "Possum": 
+                System.out.println("It is the " + dunesEnemy2.getEnemyName() + "'s turn!");
+                randomNum = tlr.nextInt(minVal, maxVal + 1);
+                System.out.println("==========");
+                if (randomNum == 0) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyAttack();
+                } else if (randomNum == 1) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyHeal();
+                } else {
+                    System.out.println("Unknown error has occurred...");
+                }
+                break; 
+            case "Worm": 
+                System.out.println("It is the " + dunesEnemy3.getEnemyName() + "'s turn!");
+                randomNum = tlr.nextInt(minVal, maxVal + 1);
+                System.out.println("==========");
+                if (randomNum == 0) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyAttack();
+                } else if (randomNum == 1) {
+                    try {
+                        Thread.sleep(3*1000);
+                    } catch (InterruptedException ie) {
+                        ie.printStackTrace();
+                    }
+                    enemyHeal();
+                } else {
+                    System.out.println("Unknown error has occurred...");
+                }
+                break; 
+        } 
+        try {
+            Thread.sleep(3 * 1000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     // BATTLE PHASES 
     public void battlePlains() {
         Random rand = new Random();
@@ -62,21 +381,27 @@ public class phase extends game{
                 System.out.println("The " + plainsEnmy1.getEnemyName() + " attacks!\n==========");
                 enemyName = "Bull";
 
-                battleScreen();
+                do {
+                    battleScreen();
+                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
                 break;
             case 1: 
                 System.out.println(plainsEnemy2.getEnemyIntro());
                 System.out.println("The " + plainsEnemy2.getEnemyName() + " attacks!\n==========");
                 enemyName = "Moose";
                
-                battleScreen();
+                do {
+                    battleScreen();
+                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
                 break;
             case 2: 
                 System.out.println(plainsEnemy3.getEnemyIntro());
                 System.out.println("The " + plainsEnemy3.getEnemyName() + " attacks!\n==========");
                 enemyName = "Bird";
 
-                battleScreen();
+                do {
+                    battleScreen();
+                } while (plainsEnmy1.isAlive == true && pl.isalive == true);            
                 break;
         }             
     }
@@ -94,9 +419,9 @@ public class phase extends game{
 
         if (randEnemy == 0) {
             enemyNum = 4; 
-        } else if (tundraEnemies.equals(tundraEnemy2)) {
+        } else if (randEnemy == 1) {
             enemyNum = 5; 
-        } else if (tundraEnemies.equals(tundraEnemy3)) {
+        } else if (randEnemy == 2) {
             enemyNum = 6; 
         }
 
@@ -104,23 +429,32 @@ public class phase extends game{
             case 0: 
                 System.out.println(tundraEnemy1.getEnemyIntro());
                 System.out.println("The " + tundraEnemy1.getEnemyName() + " attacks!\n==========");
-                enemyName = "Mound"; 
+                enemyName = "Mound";
+                
+                do {
+                    battleScreen();
+                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
 
-                battleScreen();
                 break; 
             case 1: 
                 System.out.println(tundraEnemy2.getEnemyIntro());
                 System.out.println("The " + tundraEnemy2.getEnemyName() + " attacks!\n==========");
                 enemyName = "Whale";
+
+                do {
+                    battleScreen();
+                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
                 
-                battleScreen();
                 break; 
             case 2: 
                 System.out.println(tundraEnemy3.getEnemyIntro());
                 System.out.println("The " + tundraEnemy3.getEnemyName() + " attacks!\n==========");
-                enemyName = "Raindeer"; 
+                enemyName = "Raindeer";
+                
+                do {
+                    battleScreen();
+                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
 
-                battleScreen();
                 break;
         }
     }
@@ -128,6 +462,7 @@ public class phase extends game{
     public void battleForest() {
         Random rand = new Random(); 
         Scanner scan = new Scanner(System.in); 
+        Timer tmr = new Timer(); 
 
         game gm = new game(); 
         player pl = new player(super.name); 
@@ -136,11 +471,11 @@ public class phase extends game{
 
         int randEnemy = rand.nextInt(forestEnemies.length); 
 
-        if (forestEnemies.equals(forestEnemy1)) {
+        if (randEnemy == 0) {
             enemyNum = 7; 
-        } else if (forestEnemies.equals(forestEnemy2)) {
+        } else if (randEnemy == 1) {
             enemyNum = 8; 
-        } else if (forestEnemies.equals(forestEnemy3)) {
+        } else if (randEnemy == 2) {
             enemyNum = 9;
         }
 
@@ -150,21 +485,30 @@ public class phase extends game{
                 System.out.println("The " + forestEnemy1.getEnemyName() + " attacks!\n==========");
                 enemyName = "Vine";
 
-                battleScreen();
+                do {
+                    battleScreen();
+                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+
                 break; 
             case 1: 
                 System.out.println(forestEnemy2.getEnemyIntro());
                 System.out.println("The " + forestEnemy2.getEnemyName() + " attacks!\n==========");
                 enemyName = "Monkey";
 
-                battleScreen();
+                do {
+                    battleScreen();
+                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+
                 break; 
             case 2: 
                 System.out.println(forestEnemy3.getEnemyIntro());
                 System.out.println("the " + forestEnemy3.getEnemyName() + " attacks\n==========");
                 enemyName = "Slime";
 
-                battleScreen(); 
+                do {
+                    battleScreen();
+                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+
                 break; 
         }
      }
@@ -180,11 +524,11 @@ public class phase extends game{
 
         int randEnemy = rand.nextInt(dunesEnemies.length); 
 
-        if (dunesEnemies.equals(dunesEnemy1)) {
+        if (randEnemy == 0) {
             enemyNum = 10; 
-        } else if (dunesEnemies.equals(dunesEnemy2)) {
+        } else if (randEnemy == 1) {
             enemyNum = 11; 
-        } else if (dunesEnemies.equals(dunesEnemy3)) {
+        } else if (randEnemy == 2) {
             enemyNum = 12;
         }
 
@@ -194,21 +538,30 @@ public class phase extends game{
                 System.out.println("The " + dunesEnemy1.getEnemyName() + " attacks!\n==========");
                 enemyName = "Vulture";
 
-                battleScreen(); 
+                do {
+                    battleScreen();
+                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+
                 break; 
             case 1: 
                 System.out.println(dunesEnemy2.getEnemyIntro());
                 System.out.println("The " + dunesEnemy2.getEnemyName() + " attacks!\n==========");
                 enemyName = "Possum";
 
-                battleScreen();
+                do {
+                    battleScreen();
+                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+
                 break; 
             case 2: 
                 System.out.println(dunesEnemy3.getEnemyIntro());
                 System.out.println(dunesEnemy3.getEnemyName() + " attacks!\n======");
                 enemyName = "Worm";
 
-                battleScreen();
+                do {
+                    battleScreen();
+                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+
                 break; 
         }
     }
@@ -243,6 +596,8 @@ public class phase extends game{
         }
         
     };
+
+    // timer tasks for battle screens 
 
     public void playerAttack() {
         player pl = new player(super.name); 
@@ -567,125 +922,4 @@ public class phase extends game{
         }
     }
 
-    public void battleScreen() {
-        int playerSelect;
-        int randomNum;  
-        
-        int minVal = 0; 
-        int maxVal = 1;
-
-        Timer tmr = new Timer();
-        ThreadLocalRandom tlr = ThreadLocalRandom.current();
-
-        phase phse = new phase(); 
-        player pl = new player(name);
-
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println(player.name + "\nHP: " + player.hp + "\n========");
-        System.out.println("1.) ATTACK ============ 2.) HEAL\n\nSelect either 1 or 2....");
-        
-        try {
-            playerSelect = scan.nextInt(); 
-            if (playerSelect == 1) {
-                System.out.println("==========");
-                playerAttack();
-                System.out.println("==========");
-            } else if (playerSelect == 2) {
-                System.out.println("==========");
-                pl.getHpBoost();
-                System.out.println("==========");
-            } else {
-                System.out.println("==========");
-                System.out.println("Out of bounds! ");
-                battleScreen();
-            }
-        } catch (InputMismatchException ie) {
-            System.out.println("That is an invalid input please try again...");
-            battleScreen();
-        }
-        
-        switch(enemyName) {
-            case "Bull": 
-                // ==========plains enemies========== 
-                System.out.println("It is the " + plainsEnmy1.getEnemyName()+"'s turn!");
-                //enemyAttack();
-                randomNum = tlr.nextInt(minVal, maxVal + 1);
-                System.out.println("==========");
-                if (randomNum == 0) {
-                    tmr.schedule(enemyAttacking, 1500);
-                } else if (randomNum == 1) {
-                    tmr.schedule(enemyHealing, 1500);
-                } else {
-                    System.out.println("Unknown error has occurred...");
-                }
-                break; 
-            case "Moose": 
-                System.out.println("It is the " + plainsEnemy2.getEnemyName()+"'s turn!");
-                //enemyAttack();
-                randomNum = tlr.nextInt(minVal, maxVal + 1);
-                System.out.println("==========");
-                if (randomNum == 0) {
-                    tmr.schedule(enemyAttacking, 1500);
-                } else if (randomNum == 1) {
-                    tmr.schedule(enemyHealing, 1500);
-                } else {
-                    System.out.println("Unknown error has occurred...");
-                }
-                break; 
-            case "Bird": 
-                System.out.println("it is the " + plainsEnemy3.getEnemyName()+"'s turn!");
-                //enemyAttack();
-                randomNum = tlr.nextInt(minVal, maxVal + 1);
-                System.out.println("==========");
-                if (randomNum == 0) {
-                    tmr.schedule(enemyAttacking, 1500);
-                } else if (randomNum == 1) {
-                    tmr.schedule(enemyHealing, 1500);
-                } else {
-                    System.out.println("Unknown error has occurred...");
-                }
-                break;
-            case "Mound": 
-                // ========== tundra enemies ========== 
-                System.out.println("It is the " + tundraEnemy1.getEnemyName() + "'s turn!");
-                enemyAttack();
-                break; 
-            case "Whale": 
-                System.out.println("It is the " + tundraEnemy2.getEnemyName() + "'s turn!");
-                enemyAttack();
-                break; 
-            case "Raindeer": 
-                System.out.println("It is the " + tundraEnemy3.getEnemyName() + "'s turn!");
-                enemyAttack();
-                break; 
-            case "Vine": 
-                // ========== forest enemies========== 
-                System.out.println("It is the " + forestEnemy1.getEnemyName() + "'s turn!");
-                enemyAttack();
-                break; 
-            case "Monkey": 
-                System.out.println("It is the " + forestEnemy2.getEnemyName() + "'s turn!");
-                enemyAttack();
-                break; 
-            case "Slime": 
-                System.out.println("It is the " + forestEnemy3.getEnemyName() + "'s turn!");
-                enemyAttack();
-                break;
-            case "Vulture": 
-                //  ========== dunes enemies ========== 
-                System.out.println("It is the " + dunesEnemy1.getEnemyName() + "'s turn!");
-                enemyAttack();
-                break; 
-            case "Possum": 
-                System.out.println("It is the " + dunesEnemy2.getEnemyName() + "'s turn!");
-                enemyAttack();
-                break; 
-            case "Worm": 
-                System.out.println("It is the " + dunesEnemy3.getEnemyName() + "'s turn!");
-                enemyAttack();
-                break; 
-        } 
-
-    }
 }

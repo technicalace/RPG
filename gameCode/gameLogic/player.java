@@ -9,7 +9,7 @@ import gameCode.game;
 
 public class player extends entity{
     public player(String name) {
-        super(name, 20, 5, 20);
+        super(name, 20, 5, 20, true);
         //TODO Auto-generated constructor stub
     }
     
@@ -94,6 +94,14 @@ public class player extends entity{
         hp += 3; 
         System.out.println("You have healed up 3 health points!");
         System.out.println("You hp is now " + hp);
+    }
+ }
+
+ public boolean isAlive() {
+    if (hp != 0) {
+        return isalive;
+    } else {
+        return isalive = false;
     }
  }
 }

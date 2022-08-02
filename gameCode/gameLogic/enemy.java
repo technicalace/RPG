@@ -6,41 +6,18 @@ public class enemy {
     public int enemHp;
     public int emaxHp;
     public String enemIntro;
+    public boolean isAlive;
 
     public int enemyNum;
-
-
-    public void boss(String ename, String edesc, String eintro, int edmg, int ehp, int emaxHp) {
-        this.enemName = ename;
-        this.enemIntro = eintro;
-        this.enemDesc = edesc;
-        this.enemDmg = edmg; 
-        this.enemHp = ehp; 
-        this.emaxHp = emaxHp;
-    }
-
-    public void plainsBoss() {
-        switch (enemyNum) {
-            case 1: 
-                boss("Ferioucious Bull","You see something big in the distance...", "Ears are blowing steam!", 6, 21, 21);
-                break; 
-            case 2: 
-                boss("Clever Moose","Constantly plotting... ", "You hear something rustle in the tall grass...", 4, 19, 19);
-                break; 
-            case 3: 
-                boss("Obnoxious Bird","KAWWWK KAWWWK", "You see something soar in the sky...", 5, 16, 16);
-                break; 
-        }
-    }
-
     
-    public enemy(String ename, String edesc, String eintro, int edmg, int ehp, int emaxHp) {
+    public enemy(String ename, String edesc, String eintro, int edmg, int ehp, int emaxHp, boolean ealive) {
         this.enemName = ename;
         this.enemIntro = eintro;
         this.enemDesc = edesc;
         this.enemDmg = edmg; 
         this.enemHp = ehp; 
         this.emaxHp = emaxHp;
+        this.isAlive = ealive; 
     }
 
 
@@ -85,6 +62,14 @@ public class enemy {
 
     public void setEnemyHp(int ehp) {
         this.enemHp = ehp; 
+    }
+
+    public boolean isAlive() {
+        if (enemHp != 0) {
+            return isAlive;
+        } else {
+            return false;
+        }
     }
 
 
