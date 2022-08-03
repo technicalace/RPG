@@ -14,26 +14,28 @@ import javax.swing.plaf.synth.SynthScrollBarUI;
 import gameCode.game;
 
 public class phase extends game{
+    public int currentPlHp = player.maxHp; 
     game gm = new game(); 
+    player pl = new player(name);
     public int enemyNum;
 
     public String enemyName;
     // PLAINS ENEMIES 
-    enemy plainsEnmy1 = new enemy("Ferioucious Bull","You see something big in the distance...", "Ears are blowing steam!", 6, 21, 21, true);
-    enemy plainsEnemy2 = new enemy("Clever Moose","Constantly plotting... ", "You hear something rustle in the tall grass...", 4, 19, 19, true);
-    enemy plainsEnemy3 = new enemy("Obnoxious Bird","KAWWWK KAWWWK", "You see something soar in the sky...", 5, 16, 16, true);
+    enemy plainsEnmy1 = new enemy("Ferioucious Bull","You see something big in the distance...", "Ears are blowing steam!", 6, 21, 21);
+    enemy plainsEnemy2 = new enemy("Clever Moose","Constantly plotting... ", "You hear something rustle in the tall grass...", 4, 19, 19);
+    enemy plainsEnemy3 = new enemy("Obnoxious Bird","KAWWWK KAWWWK", "You see something soar in the sky...", 5, 16, 16);
     // TUNDRA ENEMIES
-    enemy tundraEnemy1 = new enemy("Living Ice Mound", "Jumpy and crunchy!", "You feel the ground on your feet lower...", 3, 13, 13, true);
-    enemy tundraEnemy2 = new enemy("Frantic Whale", "It's huge!", "A frozen lake seprates you and the other side of the land, something starts to lift up...", 7, 16, 16, true);
-    enemy tundraEnemy3 = new enemy("Magic Raindeer", "Magical properties, never attacks directly.", "You hear prancing and a bright light in the distance getting closer...", 6, 15, 15, true);
+    enemy tundraEnemy1 = new enemy("Living Ice Mound", "Jumpy and crunchy!", "You feel the ground on your feet lower...", 3, 13, 13);
+    enemy tundraEnemy2 = new enemy("Frantic Whale", "It's huge!", "A frozen lake seprates you and the other side of the land, something starts to lift up...", 7, 16, 16);
+    enemy tundraEnemy3 = new enemy("Magic Raindeer", "Magical properties, never attacks directly.", "You hear prancing and a bright light in the distance getting closer...", 6, 15, 15);
     // FOREST ENEMIES 
-    enemy forestEnemy1 = new enemy("Living Vine", "Always growing.", "You step on a vine, it moved!", 6, 18, 18, true);
-    enemy forestEnemy2 = new enemy("Raging Monkey", "Head is steaming!", "You hear branches crack from above...", 7, 17, 17, true);
-    enemy forestEnemy3 = new enemy("Green Slime", "Goopy", "You see slime drip from the tree... it starts to fall into a blob.",4, 24, 24, true);
+    enemy forestEnemy1 = new enemy("Living Vine", "Always growing.", "You step on a vine, it moved!", 6, 18, 18);
+    enemy forestEnemy2 = new enemy("Raging Monkey", "Head is steaming!", "You hear branches crack from above...", 7, 17, 17);
+    enemy forestEnemy3 = new enemy("Green Slime", "Goopy", "You see slime drip from the tree... it starts to fall into a blob.",4, 24, 24);
     // DUNES ENEMIES
-    enemy dunesEnemy1 = new enemy("Fericoucious Vulture", "Looking to pick a fight.", "You see a soaring shadow block the blazing sun...", 7, 16, 16, true);
-    enemy dunesEnemy2 = new enemy("Cheeky Possum", "Scraubling around.", "You hear pitter patter on the floor...", 7, 15, 15, true);
-    enemy dunesEnemy3 = new enemy("Giant Sand Worm", "Slithering around.", "You feel the ground shift under your feet...", 9, 19, 19, true);
+    enemy dunesEnemy1 = new enemy("Fericoucious Vulture", "Looking to pick a fight.", "You see a soaring shadow block the blazing sun...", 7, 16, 16);
+    enemy dunesEnemy2 = new enemy("Cheeky Possum", "Scraubling around.", "You hear pitter patter on the floor...", 7, 15, 15);
+    enemy dunesEnemy3 = new enemy("Giant Sand Worm", "Slithering around.", "You feel the ground shift under your feet...", 9, 19, 19);
     
     public void battleScreen() {
         int playerSelect;
@@ -46,11 +48,16 @@ public class phase extends game{
         ThreadLocalRandom tlr = ThreadLocalRandom.current();
 
         phase phse = new phase(); 
-        player pl = new player(name);
 
         Scanner scan = new Scanner(System.in);
 
-        System.out.println(player.name + "\nHP: " + player.hp + "\n========");
+        if (currentPlHp <= 0) {
+            System.out.println("==========");
+            System.out.println("Game Over!");
+            System.exit(0);
+        }
+
+        System.out.println(player.name + "\nHP: " + currentPlHp + "\n========");
         System.out.println("1.) ATTACK ============ 2.) HEAL\n\nSelect either 1 or 2....");
         
         try {
@@ -75,7 +82,12 @@ public class phase extends game{
         
         switch(enemyName) {
             case "Bull": 
-                // ==========plains enemies========== 
+                // ==========plains enemies==========
+                if (plainsEnmy1.enemHp <= 0) {
+                    System.out.println("==========");
+                    System.out.println("Congragulations you won!");
+                    System.exit(0);
+                } 
                 System.out.println("It is the " + plainsEnmy1.getEnemyName()+"'s turn!");
                 //enemyAttack();
                 randomNum = tlr.nextInt(minVal, maxVal + 1);
@@ -98,7 +110,12 @@ public class phase extends game{
                     System.out.println("Unknown error has occurred...");
                 }
                 break; 
-            case "Moose": 
+            case "Moose":
+                if (plainsEnemy2.enemHp <= 0) {
+                    System.out.println("==========");
+                    System.out.println("Congragulations you won!");
+                    System.exit(0);
+                } 
                 System.out.println("It is the " + plainsEnemy2.getEnemyName()+"'s turn!");
                 //enemyAttack();
                 randomNum = tlr.nextInt(minVal, maxVal + 1);
@@ -121,7 +138,12 @@ public class phase extends game{
                     System.out.println("Unknown error has occurred...");
                 }
                 break; 
-            case "Bird": 
+            case "Bird":
+                if (plainsEnemy3.enemHp <= 0) {
+                    System.out.println("==========");
+                    System.out.println("Congragulations you won!");
+                    System.exit(0);
+                } 
                 System.out.println("it is the " + plainsEnemy3.getEnemyName()+"'s turn!");
                 //enemyAttack();
                 randomNum = tlr.nextInt(minVal, maxVal + 1);
@@ -144,8 +166,14 @@ public class phase extends game{
                     System.out.println("Unknown error has occurred...");
                 }
                 break;
-            case "Mound": 
+            case "Mound":
                 // ========== tundra enemies ========== 
+                if (tundraEnemy1.enemHp <= 0) {
+                    System.out.println("==========");
+                    System.out.println("Congragulations you won!");
+                    System.exit(0);
+                } 
+
                 System.out.println("It is the " + tundraEnemy1.getEnemyName() + "'s turn!");
                 randomNum = tlr.nextInt(minVal, maxVal + 1);
                 System.out.println("==========");
@@ -167,7 +195,12 @@ public class phase extends game{
                     System.out.println("Unknown error has occurred...");
                 }
                 break; 
-            case "Whale": 
+            case "Whale":
+                if (tundraEnemy2.enemHp <= 0) {
+                    System.out.println("==========");
+                    System.out.println("Congragulations you won!");
+                    System.exit(0);
+                }
                 System.out.println("It is the " + tundraEnemy2.getEnemyName() + "'s turn!");
                 randomNum = tlr.nextInt(minVal, maxVal + 1);
                 System.out.println("==========");
@@ -189,7 +222,12 @@ public class phase extends game{
                     System.out.println("Unknown error has occurred...");
                 }
                 break; 
-            case "Raindeer": 
+            case "Raindeer":
+                if (tundraEnemy1.enemHp <= 0) {
+                    System.out.println("==========");
+                    System.out.println("Congragulations you won!");
+                    System.exit(0);
+                } 
                 System.out.println("It is the " + tundraEnemy3.getEnemyName() + "'s turn!");
                 randomNum = tlr.nextInt(minVal, maxVal + 1);
                 System.out.println("==========");
@@ -212,7 +250,12 @@ public class phase extends game{
                 }
                 break; 
             case "Vine": 
-                // ========== forest enemies========== 
+                // ========== forest enemies==========
+                if (forestEnemy1.enemHp <= 0) {
+                    System.out.println("==========");
+                    System.out.println("Congragulations you won!");
+                    System.exit(0);
+                } 
                 System.out.println("It is the " + forestEnemy1.getEnemyName() + "'s turn!");
                 randomNum = tlr.nextInt(minVal, maxVal + 1);
                 System.out.println("==========");
@@ -234,7 +277,12 @@ public class phase extends game{
                     System.out.println("Unknown error has occurred...");
                 }
                 break; 
-            case "Monkey": 
+            case "Monkey":
+                if (forestEnemy2.enemHp <= 0) {
+                    System.out.println("==========");
+                    System.out.println("Congragulations you won!");
+                    System.exit(0);
+                } 
                 System.out.println("It is the " + forestEnemy2.getEnemyName() + "'s turn!");
                 randomNum = tlr.nextInt(minVal, maxVal + 1);
                 System.out.println("==========");
@@ -256,7 +304,12 @@ public class phase extends game{
                     System.out.println("Unknown error has occurred...");
                 }
                 break; 
-            case "Slime": 
+            case "Slime":
+                if (forestEnemy3.enemHp <= 0) {
+                    System.out.println("==========");
+                    System.out.println("Congragulations you won!");
+                    System.exit(0);
+                } 
                 System.out.println("It is the " + forestEnemy3.getEnemyName() + "'s turn!");
                 randomNum = tlr.nextInt(minVal, maxVal + 1);
                 System.out.println("==========");
@@ -279,7 +332,12 @@ public class phase extends game{
                 }
                 break;
             case "Vulture": 
-                //  ========== dunes enemies ========== 
+                //  ========== dunes enemies ==========
+                if (dunesEnemy1.enemHp <= 0) {
+                    System.out.println("==========");
+                    System.out.println("Congragulations you won!");
+                    System.exit(0);
+                }  
                 System.out.println("It is the " + dunesEnemy1.getEnemyName() + "'s turn!");
                 randomNum = tlr.nextInt(minVal, maxVal + 1);
                 System.out.println("==========");
@@ -301,7 +359,12 @@ public class phase extends game{
                     System.out.println("Unknown error has occurred...");
                 }
                 break; 
-            case "Possum": 
+            case "Possum":
+                if (dunesEnemy2.enemHp <= 0) {
+                    System.out.println("==========");
+                    System.out.println("Congragulations you won!");
+                    System.exit(0);
+                }  
                 System.out.println("It is the " + dunesEnemy2.getEnemyName() + "'s turn!");
                 randomNum = tlr.nextInt(minVal, maxVal + 1);
                 System.out.println("==========");
@@ -323,7 +386,12 @@ public class phase extends game{
                     System.out.println("Unknown error has occurred...");
                 }
                 break; 
-            case "Worm": 
+            case "Worm":
+                if (dunesEnemy3.enemHp <= 0) {
+                    System.out.println("==========");
+                    System.out.println("Congragulations you won!");
+                    System.exit(0);
+                } 
                 System.out.println("It is the " + dunesEnemy3.getEnemyName() + "'s turn!");
                 randomNum = tlr.nextInt(minVal, maxVal + 1);
                 System.out.println("==========");
@@ -369,39 +437,45 @@ public class phase extends game{
 
         if (randEnemy == 0) {
             enemyNum = 1; 
+            System.out.println(plainsEnmy1.getEnemyIntro());
+            System.out.println("The " + plainsEnmy1.getEnemyName() + " attacks!\n==========");
         } else if (randEnemy == 1) {
             enemyNum = 2;
+            System.out.println(plainsEnemy2.getEnemyIntro());
+            System.out.println("The " + plainsEnemy2.getEnemyName() + " attacks!\n==========");
         } else if (randEnemy == 2) {
             enemyNum = 3;
+            System.out.println(plainsEnemy3.getEnemyIntro());
+            System.out.println("The " + plainsEnemy3.getEnemyName() + " attacks!\n==========");
         }
         
         switch(randEnemy) {
             case 0: 
-                System.out.println(plainsEnmy1.getEnemyIntro());
-                System.out.println("The " + plainsEnmy1.getEnemyName() + " attacks!\n==========");
+                /*System.out.println(plainsEnmy1.getEnemyIntro());
+                System.out.println("The " + plainsEnmy1.getEnemyName() + " attacks!\n==========");*/
                 enemyName = "Bull";
 
-                do {
-                    battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+                    do {
+                        battleScreen();
+                    } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
                 break;
             case 1: 
-                System.out.println(plainsEnemy2.getEnemyIntro());
-                System.out.println("The " + plainsEnemy2.getEnemyName() + " attacks!\n==========");
+                /*System.out.println(plainsEnemy2.getEnemyIntro());
+                System.out.println("The " + plainsEnemy2.getEnemyName() + " attacks!\n==========");*/
                 enemyName = "Moose";
                
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+                } while (plainsEnemy2.isAlive == true && pl.isAlive == true);
                 break;
             case 2: 
-                System.out.println(plainsEnemy3.getEnemyIntro());
-                System.out.println("The " + plainsEnemy3.getEnemyName() + " attacks!\n==========");
+                /*System.out.println(plainsEnemy3.getEnemyIntro());
+                System.out.println("The " + plainsEnemy3.getEnemyName() + " attacks!\n==========");*/
                 enemyName = "Bird";
 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isalive == true);            
+                } while (plainsEnemy3.isAlive == true && pl.isAlive == true);
                 break;
         }             
     }
@@ -427,13 +501,11 @@ public class phase extends game{
 
         switch (randEnemy) {
             case 0: 
-                System.out.println(tundraEnemy1.getEnemyIntro());
-                System.out.println("The " + tundraEnemy1.getEnemyName() + " attacks!\n==========");
                 enemyName = "Mound";
                 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
 
                 break; 
             case 1: 
@@ -443,7 +515,7 @@ public class phase extends game{
 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
                 
                 break; 
             case 2: 
@@ -453,7 +525,7 @@ public class phase extends game{
                 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
 
                 break;
         }
@@ -487,7 +559,7 @@ public class phase extends game{
 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
 
                 break; 
             case 1: 
@@ -497,7 +569,7 @@ public class phase extends game{
 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
 
                 break; 
             case 2: 
@@ -507,7 +579,7 @@ public class phase extends game{
 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
 
                 break; 
         }
@@ -540,7 +612,7 @@ public class phase extends game{
 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
 
                 break; 
             case 1: 
@@ -550,7 +622,7 @@ public class phase extends game{
 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
 
                 break; 
             case 2: 
@@ -560,7 +632,7 @@ public class phase extends game{
 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isalive == true);
+                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
 
                 break; 
         }
@@ -610,16 +682,25 @@ public class phase extends game{
                 plainsEnmy1.enemHp -= pl.dmg; 
 
                 System.out.println("Enemy HP: " + plainsEnmy1.getEnemyHealth());
+                if (plainsEnmy1.enemHp <= 0) {
+                    plainsEnmy1.isAlive = false;
+                }
                 break;
             case "Moose": 
                 plainsEnemy2.enemHp -= pl.dmg; 
 
                 System.out.println("Enemy HP: " + plainsEnemy2.getEnemyHealth());
+                if (plainsEnemy2.enemHp <= 0) {
+                    plainsEnemy2.isAlive = false;
+                }
                 break; 
             case "Bird": 
                 plainsEnemy3.enemHp -= pl.dmg; 
 
                 System.out.println("Enemy HP: " + plainsEnemy3.getEnemyHealth());
+                if (plainsEnemy3.enemHp <= 0) {
+                    plainsEnemy3.isAlive = false;
+                }
                 break;
             case "Mound": 
                 // TUNDRA ENEMIES 
@@ -672,7 +753,6 @@ public class phase extends game{
     }
 
     public void enemyAttack() {
-        player pl = new player(super.name);
 
         switch (enemyNum) {
             case 1: 
@@ -680,100 +760,100 @@ public class phase extends game{
                 System.out.println(plainsEnmy1.getEnemyName() + " attacks!");
                 System.out.println("-" + plainsEnmy1.getEnemyDmg());
 
-                pl.hp -= plainsEnmy1.enemDmg;
+                currentPlHp -= plainsEnmy1.enemDmg;
 
-                System.out.println("HP: " + pl.hp);
+                System.out.println("HP: " + currentPlHp);
                 break;
             case 2: 
                 System.out.println(plainsEnemy2.getEnemyName() + " attacks!");
                 System.out.println("-" + plainsEnemy2.getEnemyDmg());
 
-                pl.hp -= plainsEnemy2.enemDmg;
+                currentPlHp -= plainsEnemy2.enemDmg;
 
-                System.out.println("HP: " + pl.hp);
+                System.out.println("HP: " + currentPlHp);
                 break; 
             case 3: 
                 System.out.println(plainsEnemy3.getEnemyName() + " attacks!");
                 System.out.println("-" + plainsEnemy3.getEnemyDmg());
 
-                pl.hp -= plainsEnemy3.enemDmg;
+                currentPlHp -= plainsEnemy3.enemDmg;
 
-                System.out.println("HP: " + pl.hp);
+                System.out.println("HP: " + currentPlHp);
                 break; 
             case 4: 
                 // TUNDRA ENEMIES
                 System.out.println(tundraEnemy1.getEnemyName() + " attacks!");
                 System.out.println("-" + tundraEnemy1.getEnemyDmg());
 
-                pl.hp -= tundraEnemy1.enemDmg; 
+                currentPlHp -= tundraEnemy1.enemDmg; 
 
-                System.out.println("HP: " + pl.hp);
+                System.out.println("HP: " + currentPlHp);
                 break; 
             case 5: 
                 System.out.println(tundraEnemy2.getEnemyName() + " attacks!");
                 System.out.println("-" + tundraEnemy2.getEnemyDmg());
 
-                pl.hp -= tundraEnemy2.enemDmg; 
+                currentPlHp -= tundraEnemy2.enemDmg; 
 
-                System.out.println("HP: " + pl.hp);
+                System.out.println("HP: " + currentPlHp);
                 break; 
             case 6: 
                 System.out.println(tundraEnemy3.getEnemyName() + " attacks!");
                 System.out.println("-" + tundraEnemy3.getEnemyDmg());
 
-                pl.hp -= tundraEnemy3.enemDmg; 
+                currentPlHp -= tundraEnemy3.enemDmg; 
 
-                System.out.println("HP: " + pl.hp);
+                System.out.println("HP: " + currentPlHp);
                 break;
             case 7: 
                 // FOREST ENEMIES 
                 System.out.println(forestEnemy1.getEnemyName() + " attacks!");
                 System.out.println("-" + forestEnemy1.getEnemyDmg());
 
-                pl.hp -= forestEnemy1.enemDmg; 
+                currentPlHp -= forestEnemy1.enemDmg; 
 
-                System.out.println("HP: " + pl.hp);
+                System.out.println("HP: " + currentPlHp);
                 break; 
             case 8: 
                 System.out.println(forestEnemy2.getEnemyName() + " attacks!");
                 System.out.println("-" + forestEnemy2.getEnemyDmg());
 
-                pl.hp -= forestEnemy2.enemDmg; 
+                currentPlHp -= forestEnemy2.enemDmg; 
 
-                System.out.println("HP " + pl.hp);
+                System.out.println("HP " + currentPlHp);
                 break;
             case 9: 
                 System.out.println(forestEnemy3.getEnemyName() + " attacks!");
                 System.out.println("-" + forestEnemy3.getEnemyDmg());
 
-                pl.hp -= forestEnemy3.enemDmg;
+                currentPlHp -= forestEnemy3.enemDmg;
 
-                System.out.println("HP: " + pl.hp);
+                System.out.println("HP: " + currentPlHp);
                 break; 
             case 10: 
                 // DUNES ENEMIES 
                 System.out.println(dunesEnemy1.getEnemyName() + " attacks!");
                 System.out.println("-" + forestEnemy2.getEnemyDmg());
 
-                pl.hp -= dunesEnemy1.enemDmg; 
+                currentPlHp -= dunesEnemy1.enemDmg; 
 
-                System.out.println("HP: " + pl.hp);
+                System.out.println("HP: " + currentPlHp);
                 break; 
             case 11: 
                 System.out.println(dunesEnemy2.getEnemyName() + " attacks!");
                 System.out.println("-" + dunesEnemy2.getEnemyDmg());
 
-                pl.hp -= dunesEnemy2.enemDmg; 
+                currentPlHp -= dunesEnemy2.enemDmg; 
 
-                System.out.println("HP: " + pl.hp);
+                System.out.println("HP: " + currentPlHp);
                 break; 
             case 12: 
                 System.out.println(dunesEnemy3.getEnemyName() + " attacks!");
                 System.out.println("-" + dunesEnemy3.getEnemyDmg());
 
-                pl.hp -= dunesEnemy3.enemDmg; 
+                currentPlHp -= dunesEnemy3.enemDmg; 
 
-                System.out.println("HP: " + pl.hp);
+                System.out.println("HP: " + currentPlHp);
                 break; 
             }
     }

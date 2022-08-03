@@ -6,18 +6,19 @@ public class enemy {
     public int enemHp;
     public int emaxHp;
     public String enemIntro;
-    public boolean isAlive;
+    public boolean isAlive; 
 
     public int enemyNum;
     
-    public enemy(String ename, String edesc, String eintro, int edmg, int ehp, int emaxHp, boolean ealive) {
+    public enemy(String ename, String edesc, String eintro, int edmg, int ehp, int emaxHp) {
         this.enemName = ename;
         this.enemIntro = eintro;
         this.enemDesc = edesc;
         this.enemDmg = edmg; 
         this.enemHp = ehp; 
         this.emaxHp = emaxHp;
-        this.isAlive = ealive; 
+
+        isAlive = true;
     }
 
 
@@ -65,10 +66,10 @@ public class enemy {
     }
 
     public boolean isAlive() {
-        if (enemHp != 0) {
-            return isAlive;
-        } else {
+        if (enemHp <= 0) {
             return false;
+        } else {
+            return isAlive;
         }
     }
 

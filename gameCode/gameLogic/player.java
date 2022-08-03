@@ -8,9 +8,12 @@ import javax.swing.plaf.synth.SynthScrollPaneUI;
 import gameCode.game;
 
 public class player extends entity{
+    public boolean isAlive;
+
     public player(String name) {
-        super(name, 20, 5, 20, true);
+        super(name, 5, 20, true);
         //TODO Auto-generated constructor stub
+        isAlive = true;
     }
     
    //player specific functions 

@@ -5,10 +5,10 @@ public class entity {
     public int hp, dmg, maxHp;
     public boolean isalive;
     
-    public entity(String name, int hp, int dmg, int maxHp, boolean isalive) {
+    public entity(String name, int dmg, int maxHp, boolean isalive) {
         this.name = name; 
-        this.hp = hp; 
         this.dmg = dmg;
+        this.hp = hp;
         this.maxHp = maxHp; 
         this.isalive = isalive;
     }
