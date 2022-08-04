@@ -69,9 +69,14 @@ public class phase extends game{
                 System.out.println("==========");
                 if (pl.currentPlHp >= pl.maxHp) {
                     System.out.println("You maxed out!");
+                    pl.currentPlHp = pl.maxHp;
                     System.out.println("HP: " + pl.currentPlHp);
                 } else {
-                    pl.getHpBoost();
+                    if (pl.counter >= 2) {
+                        System.out.println("You have maxed out on your heals...");
+                    } else {
+                        pl.getHpBoost();
+                    }
                 }
                 System.out.println("==========");
             } else {
@@ -496,7 +501,9 @@ public class phase extends game{
         int randEnemy = rand.nextInt(tundraEnemies.length); 
 
         if (randEnemy == 0) {
-            enemyNum = 4; 
+            enemyNum = 4;
+            System.out.println(tundraEnemy1.getEnemyIntro());
+            System.out.println("The " + tundraEnemy1.getEnemyName() + " attacks!\n=========="); 
         } else if (randEnemy == 1) {
             enemyNum = 5; 
         } else if (randEnemy == 2) {
@@ -509,7 +516,7 @@ public class phase extends game{
                 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
+                } while (tundraEnemy1.isAlive == true && pl.isAlive == true);
 
                 break; 
             case 1: 
@@ -519,7 +526,7 @@ public class phase extends game{
 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
+                } while (tundraEnemy2.isAlive == true && pl.isAlive == true);
                 
                 break; 
             case 2: 
@@ -529,7 +536,7 @@ public class phase extends game{
                 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
+                } while (tundraEnemy3.isAlive == true && pl.isAlive == true);
 
                 break;
         }
@@ -563,7 +570,7 @@ public class phase extends game{
 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
+                } while (forestEnemy1.isAlive == true && pl.isAlive == true);
 
                 break; 
             case 1: 
@@ -573,7 +580,7 @@ public class phase extends game{
 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
+                } while (forestEnemy2.isAlive == true && pl.isAlive == true);
 
                 break; 
             case 2: 
@@ -583,7 +590,7 @@ public class phase extends game{
 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
+                } while (forestEnemy3.isAlive == true && pl.isAlive == true);
 
                 break; 
         }
@@ -616,7 +623,7 @@ public class phase extends game{
 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
+                } while (dunesEnemy1.isAlive == true && pl.isAlive == true);
 
                 break; 
             case 1: 
@@ -626,7 +633,7 @@ public class phase extends game{
 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
+                } while (dunesEnemy2.isAlive == true && pl.isAlive == true);
 
                 break; 
             case 2: 
@@ -636,7 +643,7 @@ public class phase extends game{
 
                 do {
                     battleScreen();
-                } while (plainsEnmy1.isAlive == true && pl.isAlive == true);
+                } while (dunesEnemy3.isAlive == true && pl.isAlive == true);
 
                 break; 
         }

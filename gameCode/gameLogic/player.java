@@ -10,6 +10,7 @@ import gameCode.game;
 public class player extends entity{
     public boolean isAlive;
     public int currentPlHp = 20;
+    public int counter = 0; 
 
     public player(String name) {
         super(name, 5, 20, 20, true);
@@ -89,16 +90,18 @@ public class player extends entity{
  }
 
  public void getHpBoost() { 
-    int counter = 3; 
     phase phse = new phase();
 
-   if (currentPlHp < maxHp) {
-    System.out.println("You have healed 3 health points!");
-    currentPlHp += 3; 
-    System.out.println("HP: " + currentPlHp); 
-   }
+        if (currentPlHp <= maxHp) {
+            System.out.println("You have healed 3 health points!");
+            counter++;
+            currentPlHp += 3; 
+            System.out.println("HP: " + currentPlHp);
+        } 
+       
+    }
 
- }
+ 
 
  public boolean isAlive() {
     if (hp != 0) {
