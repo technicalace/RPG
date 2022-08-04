@@ -9,9 +9,10 @@ import gameCode.game;
 
 public class player extends entity{
     public boolean isAlive;
+    public int currentPlHp = 20;
 
     public player(String name) {
-        super(name, 5, 20, true);
+        super(name, 5, 20, 20, true);
         //TODO Auto-generated constructor stub
         isAlive = true;
     }
@@ -89,15 +90,14 @@ public class player extends entity{
 
  public void getHpBoost() { 
     int counter = 3; 
+    phase phse = new phase();
 
-    if (hp <= maxHp) {
-        hp = maxHp; 
-        System.out.println("You have healed!\nYour HP is now " + hp);
-    } else if (hp < maxHp) {
-        hp += 3; 
-        System.out.println("You have healed up 3 health points!");
-        System.out.println("You hp is now " + hp);
-    }
+   if (currentPlHp < maxHp) {
+    System.out.println("You have healed 3 health points!");
+    currentPlHp += 3; 
+    System.out.println("HP: " + currentPlHp); 
+   }
+
  }
 
  public boolean isAlive() {

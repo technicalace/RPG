@@ -14,7 +14,6 @@ import javax.swing.plaf.synth.SynthScrollBarUI;
 import gameCode.game;
 
 public class phase extends game{
-    public int currentPlHp = player.maxHp; 
     game gm = new game(); 
     player pl = new player(name);
     public int enemyNum;
@@ -51,13 +50,13 @@ public class phase extends game{
 
         Scanner scan = new Scanner(System.in);
 
-        if (currentPlHp <= 0) {
+        if (pl.currentPlHp <= 0) {
             System.out.println("==========");
             System.out.println("Game Over!");
             System.exit(0);
         }
 
-        System.out.println(player.name + "\nHP: " + currentPlHp + "\n========");
+        System.out.println(player.name + "\nHP: " + pl.currentPlHp + "\n========");
         System.out.println("1.) ATTACK ============ 2.) HEAL\n\nSelect either 1 or 2....");
         
         try {
@@ -68,7 +67,12 @@ public class phase extends game{
                 System.out.println("==========");
             } else if (playerSelect == 2) {
                 System.out.println("==========");
-                pl.getHpBoost();
+                if (pl.currentPlHp >= pl.maxHp) {
+                    System.out.println("You maxed out!");
+                    System.out.println("HP: " + pl.currentPlHp);
+                } else {
+                    pl.getHpBoost();
+                }
                 System.out.println("==========");
             } else {
                 System.out.println("==========");
@@ -732,7 +736,7 @@ public class phase extends game{
             case "Slime": 
                 forestEnemy3.enemHp -= pl.dmg; 
 
-                System.out.println("Enemy HP: " + forestEnemy3.getEnemyName());
+                System.out.println("Enemy HP: " + forestEnemy3.getEnemyHealth());
                 break; 
             case "Vulture": 
                 // DUNES ENEMIES 
@@ -760,100 +764,100 @@ public class phase extends game{
                 System.out.println(plainsEnmy1.getEnemyName() + " attacks!");
                 System.out.println("-" + plainsEnmy1.getEnemyDmg());
 
-                currentPlHp -= plainsEnmy1.enemDmg;
+                pl.currentPlHp -= plainsEnmy1.enemDmg;
 
-                System.out.println("HP: " + currentPlHp);
+                System.out.println("HP: " + pl.currentPlHp);
                 break;
             case 2: 
                 System.out.println(plainsEnemy2.getEnemyName() + " attacks!");
                 System.out.println("-" + plainsEnemy2.getEnemyDmg());
 
-                currentPlHp -= plainsEnemy2.enemDmg;
+                pl.currentPlHp -= plainsEnemy2.enemDmg;
 
-                System.out.println("HP: " + currentPlHp);
+                System.out.println("HP: " + pl.currentPlHp);
                 break; 
             case 3: 
                 System.out.println(plainsEnemy3.getEnemyName() + " attacks!");
                 System.out.println("-" + plainsEnemy3.getEnemyDmg());
 
-                currentPlHp -= plainsEnemy3.enemDmg;
+                pl.currentPlHp -= plainsEnemy3.enemDmg;
 
-                System.out.println("HP: " + currentPlHp);
+                System.out.println("HP: " + pl.currentPlHp);
                 break; 
             case 4: 
                 // TUNDRA ENEMIES
                 System.out.println(tundraEnemy1.getEnemyName() + " attacks!");
                 System.out.println("-" + tundraEnemy1.getEnemyDmg());
 
-                currentPlHp -= tundraEnemy1.enemDmg; 
+                pl.currentPlHp -= tundraEnemy1.enemDmg; 
 
-                System.out.println("HP: " + currentPlHp);
+                System.out.println("HP: " + pl.currentPlHp);
                 break; 
             case 5: 
                 System.out.println(tundraEnemy2.getEnemyName() + " attacks!");
                 System.out.println("-" + tundraEnemy2.getEnemyDmg());
 
-                currentPlHp -= tundraEnemy2.enemDmg; 
+                pl.currentPlHp -= tundraEnemy2.enemDmg; 
 
-                System.out.println("HP: " + currentPlHp);
+                System.out.println("HP: " + pl.currentPlHp);
                 break; 
             case 6: 
                 System.out.println(tundraEnemy3.getEnemyName() + " attacks!");
                 System.out.println("-" + tundraEnemy3.getEnemyDmg());
 
-                currentPlHp -= tundraEnemy3.enemDmg; 
+                pl.currentPlHp -= tundraEnemy3.enemDmg; 
 
-                System.out.println("HP: " + currentPlHp);
+                System.out.println("HP: " + pl.currentPlHp);
                 break;
             case 7: 
                 // FOREST ENEMIES 
                 System.out.println(forestEnemy1.getEnemyName() + " attacks!");
                 System.out.println("-" + forestEnemy1.getEnemyDmg());
 
-                currentPlHp -= forestEnemy1.enemDmg; 
+                pl.currentPlHp -= forestEnemy1.enemDmg; 
 
-                System.out.println("HP: " + currentPlHp);
+                System.out.println("HP: " + pl.currentPlHp);
                 break; 
             case 8: 
                 System.out.println(forestEnemy2.getEnemyName() + " attacks!");
                 System.out.println("-" + forestEnemy2.getEnemyDmg());
 
-                currentPlHp -= forestEnemy2.enemDmg; 
+                pl.currentPlHp -= forestEnemy2.enemDmg; 
 
-                System.out.println("HP " + currentPlHp);
+                System.out.println("HP " + pl.currentPlHp);
                 break;
             case 9: 
                 System.out.println(forestEnemy3.getEnemyName() + " attacks!");
                 System.out.println("-" + forestEnemy3.getEnemyDmg());
 
-                currentPlHp -= forestEnemy3.enemDmg;
+                pl.currentPlHp -= forestEnemy3.enemDmg;
 
-                System.out.println("HP: " + currentPlHp);
+                System.out.println("HP: " + pl.currentPlHp);
                 break; 
             case 10: 
                 // DUNES ENEMIES 
                 System.out.println(dunesEnemy1.getEnemyName() + " attacks!");
                 System.out.println("-" + forestEnemy2.getEnemyDmg());
 
-                currentPlHp -= dunesEnemy1.enemDmg; 
+                pl.currentPlHp -= dunesEnemy1.enemDmg; 
 
-                System.out.println("HP: " + currentPlHp);
+                System.out.println("HP: " + pl.currentPlHp);
                 break; 
             case 11: 
                 System.out.println(dunesEnemy2.getEnemyName() + " attacks!");
                 System.out.println("-" + dunesEnemy2.getEnemyDmg());
 
-                currentPlHp -= dunesEnemy2.enemDmg; 
+                pl.currentPlHp -= dunesEnemy2.enemDmg; 
 
-                System.out.println("HP: " + currentPlHp);
+                System.out.println("HP: " + pl.currentPlHp);
                 break; 
             case 12: 
                 System.out.println(dunesEnemy3.getEnemyName() + " attacks!");
                 System.out.println("-" + dunesEnemy3.getEnemyDmg());
 
-                currentPlHp -= dunesEnemy3.enemDmg; 
+                pl.currentPlHp -= dunesEnemy3.enemDmg; 
 
-                System.out.println("HP: " + currentPlHp);
+                System.out.println("HP: " + pl.currentPlHp);
                 break; 
             }
     }
